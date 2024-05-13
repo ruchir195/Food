@@ -1,0 +1,34 @@
+<div class="main">
+    <section class="otp-content">
+        <div class="otp-content-lt"></div>
+        <div class="otp-content-rt">
+          <div class="otp-box">
+          <form class="otp-form" [formGroup]="otpfrom">
+            <div class="logo-wrapper">
+              <img src="../../assets/Images/logo.svg" alt="Rishabh Software">
+              <span>Meal Facility</span>
+            </div>
+            <h3 class="otp-head">Change Password</h3>
+            <p class="otp-text">Enter OTP and Create new password for your account.</p>
+            <div class="form-group">
+              <label class="control-label">Enter OTP</label>
+              <div class="input-addon" [class.error]="otpfrom.controls['password'].dirty && otpfrom.hasError('required','password')">
+                <input formControlName="password" id="password-field" class="form-control"  [type]="type" placeholder="Enter OTP" autofocus>
+                <i class="fa" [ngClass]="{'fa-eye': !hide, 'fa-eye-slash': hide}" (click)="toggleVisibility()"></i>
+              </div> 
+              <small *ngIf="otpfrom.controls['password'].dirty && otpfrom.hasError('required','password')" class="text-danger">*OTP is Required</small>             
+            </div>            
+
+            <div class="d-flex align-items-center justify-content-between">
+              <div class="form-group mb-0">              
+            </div>            
+            </div>
+          
+            <div class="form-group btn-container">
+              <button class="btn btn-xl btn-primary" routerLink="/newpassword">Submit</button>
+            </div>
+          </form>
+        </div>
+        </div>
+        
+        

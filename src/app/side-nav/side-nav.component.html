@@ -1,0 +1,62 @@
+<div>
+    <div id="header_top" class="header_top" style="border-right:dotted 1px white;">
+        <div class="container" style="background: linear-gradient(180deg,  rgb(26, 26, 87),#f3f6f5);">
+            <div class="hleft">
+                <div class="dropdown">
+                    <a ui-serf="users" class="nav-link icon user_btn resizeupto765" title="Software"><img src="../../assets/Images/logo-white.svg" alt="logo" /></a>
+                </div>
+            </div>
+            <div class="hright">
+                <div class="dropdown">
+                    <a href="javascript:void(0)" id="toggle-open-icon" class="nav-link icon menu_toggle open-menu"
+                        (click)="openMenuFunction()" title="Open Menu"><i class="fa fa-caret-right"></i></a>
+                    <a href="javascript:void(0)" id="toggle-close-icon" class="nav-link icon menu_toggle close-menu hide" 
+                        (click)="closeMenuFunction()" title="Close Menu"><i class="fa fa-caret-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- start Main menu -->
+    <div id="left-sidebar" class="sidebar" style="background: linear-gradient(180deg,  rgb(26, 26, 87),#f3f6f5);">
+        <div class="d-flex justify-content-between brand_name">
+            <!--<h5 class="brand-name text-center" style="width:100%;">-->
+            <!--<img src="images/logo.png" style="max-height:70px;" />-->
+        </div>
+        <div class="tab-content" style="padding: 0px; margin-top: 0px;">
+            <div class="tab-pane fade active show" id="all-tab">
+                <nav class="sidebar-nav">
+                    <ul class="metismenu ci-effect-1">
+
+                        <!-- <li class="g_heading">System Menu</li> -->
+                        <li>
+                            <ul>
+                                <li routerLink="/aboutus" class="pointer" routerLinkActive="active" style="color: white;">
+                                    <a title="About Us">
+                                        About Us
+                                    </a>
+                                </li>
+                                <li routerLink="/contactus" class="pointer" routerLinkActive="active" style="color: white;">
+                                    <a title="Contact Us">
+                                        Contact Us
+                                    </a>
+                                </li>
+                                <li routerLink="/privacy-policy" class="pointer" routerLinkActive="active" style="color: white;">
+                                    <a title="Privacy Policy">
+                                        Privacy Policy
+                                    </a>
+                                </li>
+                                <li routerLink="/termsandcondition" class="pointer" routerLinkActive="active" style="color: white;">
+                                    <a title="Terms & Condition">
+                                        Terms & Condition
+                                    </a>
+                                </li>    
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

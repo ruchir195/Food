@@ -1,0 +1,50 @@
+﻿.savebtnprimary {
+    background-color: #0c8241 !important;
+    color: white;
+}
+
+.resetbtnsecondary {
+    background-color: #116099 !important;
+    color: white;
+}
+
+.successbtn {
+    background-color: #0c8241 !important;
+    color: white;
+}
+.warningbtn {
+    background-color: #116099 !important;
+    color: white;
+}
+.dangerbtn {
+    background-color: #d43f3a !important;
+    color: white;
+}
+.notificationbtn {
+    background-color: #138496 !important;
+    color: white;
+}
+.disablebtn {
+    background-color: grey !important;
+    color: white;
+}
+
+.savebtnprimary {
+    background-color: #042951 !important;
+    color: white !important;
+}
+
+.savebtnprimary:hover {
+    background-color: black !important;
+    color: white !important;
+}
+
+.cancelbtnprimary {
+    background-color: #6f6f6f !important;
+    color: white !important;
+}
+
+.cancelbtnprimary:hover {
+    background-color: black !important;
+    color: white !important;
+}

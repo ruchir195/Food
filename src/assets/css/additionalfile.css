@@ -1,0 +1,289 @@
+body {
+
+}
+.auth{
+    background: black !important; 
+}
+.header-brand h1 {
+    font-size: 62px !important;
+    text-shadow: 4px 3px rgb(0 0 0 / 52%);
+    color: white !important;
+}
+.header-brand p{
+    color: white !important; 
+    margin: 0px 0px 10px 0px !important;
+}
+
+.auth .card-body {
+    background: #99ffff !important;
+    /*border: 1px solid black;*/
+    border-radius: 5px;
+}
+.auth .form-group.style2 {
+    background: #99ffff !important;
+}
+.auth .card-title{
+    color: black !important;
+    margin-bottom: 12px !important;
+}
+
+.auth .form-footer .btn-block{
+    width: 20%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: black !important;
+}
+
+.form-group.style2 .form-label {
+    font-size: medium !important;
+    color: black !important;
+}
+
+.sidebar_dark.offcanvas-active #header_top {
+    background-color: #99ffff94 !important;
+}
+
+.sidebar_dark #left-sidebar {
+    /* background-color: #39374e !important;
+    background: linear-gradient(202deg, #99ffff, #00000026); */
+    background-color: white !important;
+}
+
+.iconcolor #header_top .nav-link {
+    color: black !important;
+}
+
+.sidebar_dark .sidebar .metismenu .active > a {
+    /* color: black !important; */
+}
+/*@media screen and (max-width: 767px) {
+    .row {
+        margin-right: -7.5px;
+        margin-left: 5% !important;
+    }
+    .categoryrow{
+        margin-left: 12% !important;
+    }
+}
+    changed on 22/11/2022 for margin of every block we have given some margin but in topnav we dont need any margin of left
+*/
+
+@media screen and (max-width: 992.8px) {
+    .page-header .left {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+/*not required, beacuse we need content in flex end
+    @media screen and (max-width: 992px) {
+    .page-header .right {
+        margin-top: 15px;*/
+        /*justify-content: space-between;*/
+        /*justify-content: center !important;
+    }
+}*/
+
+@media screen and (max-width: 767px) {
+    .page-header .left {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        /* text-align: center; */
+        justify-content: center;
+    }
+    .page-header .right .notification {
+        position: relative;
+         margin-left: 13%; 
+    }
+}
+
+/*@media screen and (max-width: 768px) {.page-content {
+    margin: 0rem 0rem 1.5rem 2rem !important;
+}
+}
+    changed beacuse there was to much spacing due to margin 
+    changed on 22/11/2022
+*/
+
+#left-sidebar .nav-link {
+    max-width: 200px;
+    font-size: xx-large;
+    float: right;
+    margin-top: auto;
+}
+#left-sidebar .nav-link {
+    padding: 0 0 !important;
+}
+
+#left-sidebar i{
+    color: rgb(104, 103, 103);
+}
+.cpass{
+    display:block;
+    margin-left:auto;
+    margin-right: auto;
+}
+
+.offcanvas-active .page {
+    left: 330px !important;
+    width: calc(100% - 330px) !important;
+}
+
+.page {
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+    left: 60px !important;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    width: calc(100% - 60px) !important;
+    position: relative;
+}
+
+.offcanvas-active #left-sidebar {
+    left: 0 !important;
+}
+
+#left-sidebar {
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+    -o-transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    width: 333px !important;
+    background-color: #fff;
+    border-right: 1px solid #E6E9ED;
+    padding: 15px 15px 20px 65px !important;
+    height: 100vh;
+    left: -330px !important;
+    /* overflow-y: auto; */
+    position: fixed;
+    top: 0;
+}
+
+.sidebar_dark #header_top {
+    border: 0;
+    background: linear-gradient(202deg, #99ffff, #00000024);
+}
+/*sidebar color changing*/
+
+/*.endicon {
+    display: flex;
+    justify-content: end !important;
+}*/
+
+/*.hright{
+    margin-top: auto
+}*/
+
+/*for profile button*/
+.dropdown-menu.show {
+    position: absolute;
+    transform: translate3d(-80px, 35px, 0px);
+    top: 0px;
+    left: 0px;
+    will-change: transform;
+}
+
+@media screen and (max-width: 767.9px) {
+    .offcanvas-active .page {
+        left: 0px !important;
+        width: calc(100% - 0px) !important;
+    }
+
+    .page {
+        margin-top: 10%
+    }
+}
+.resizeupto765{
+    margin-top: 20px;
+}
+
+@media screen and (max-width: 767.9px) {
+    .resizeupto765 {
+        margin-top: 0;
+    }
+}
+
+.hright{
+    margin-top: auto;
+}
+
+@media screen and (max-width: 767.9px) {
+    .hright{
+        margin-top: 0;
+        margin-left: auto;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .page-header .lefttocenter {
+/*        margin-top: 15px;*/
+        justify-content: center !important /*changed from space-between to flex-end*/;
+    }
+}
+/*
+.imgwdel .img{
+    display:block;
+}*/
+
+/*.imgwdel .imgbtn{*/
+    /*position: absolute;*/
+    /*top: 25px;
+    right: 25px;
+}*/
+.res {
+    max-height: 18px;
+    right: 50px;
+}
+/*@media screen and (max-width: 1240px){
+    .res{
+        right: 125px;
+    }
+}
+@media screen and (max-width: 991.7px) {
+    .res {
+        right: 8%;
+    }
+}*/
+/*.me-2{
+    margin-right: 0px !important;
+}
+
+.align-middle{
+    vertical-align: middle !important;
+}*/
+.mainmenu {
+    display: none !important;
+}
+
+@media screen and (max-width: 599.8px){
+    .mainmenu{
+        display: block !important;
+    }
+}
+#menu{
+    display: inline-flex;
+}
+/* .menu{
+    color: black !important;
+} */
+
+@media screen and (max-width: 599.8px) {
+    #menu {
+        display: none;
+    }
+}
+
+.menu:hover {
+    background-color: #0c8241 !important;
+    color:white !important;
+    border-radius: 5px;
+}
+
+
+
