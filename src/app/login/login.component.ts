@@ -34,7 +34,14 @@ ngOnInit(): void
 {
   this.loginForm=this.fb.group({
     username: ['',Validators.required],
-    password: ['',Validators.required]    
+    password: ['',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]] 
+
+  // At least 6 characters long
+  // Contains at least one uppercase letter
+  // Contains at least one lowercase letter
+  // Contains at least one digit
+  // Contains at least one special character (@, $, !, %, *, ?, &)
+
   })
 }
    

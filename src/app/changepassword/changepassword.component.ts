@@ -9,9 +9,14 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 export class ChangepasswordComponent {
   hide = true;
   type = "password"; 
-  newpasForm !: FormGroup<{ password: FormControl<string | null>; }>;
-
   
+
+  toggleVisibility(): void {    
+    this.hide = !this.hide;
+    this.type == "password" ? this.type ="text": this.type = "password"
+  }
+  
+    
   
 loginForm !: FormGroup;
 hideOld= true;
@@ -20,6 +25,7 @@ hideconfirm= true;
 typeOld="password"
 typeNew="password"
 newpasFrom !: FormGroup
+newpasForm !: FormGroup<{ password: FormControl<string | null>; }>;
 
 constructor(private fb:FormBuilder)
 {
@@ -29,25 +35,11 @@ constructor(private fb:FormBuilder)
 ngOnInit(): void
 {
   this.newpasForm=this.fb.group({ 
-
-    password: ['',Validators.required]    
+    // opassword: ['',Validators.required],
+    password: ['',Validators.required],    
   })
 }
    
-toggleVisibility(): void {    
-  this.hide = !this.hide;
-  this.type == "password" ? this.type ="text": this.type = "password"
-}
-
-toggleVisibility1(): void {
-  this.hide = !this.hide;
-  this.type == "password" ? this.type ="text": this.type = "password"
-}
-
-toggleVisibility2(): void {
-  this.hide = !this.hide;
-  this.type == "password" ? this.type ="text": this.type = "password"
-}
 
   onSubmite(){
     if(this.newpasForm.valid)

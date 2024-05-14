@@ -15,8 +15,8 @@
             
             <div class="form-group">
               <label class="control-label">User Name</label>
-              <div class="input-addon" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
-                <input formControlName="Username" class="form-control" type="text" placeholder="Enter Username" autofocus>
+              <div class="input-field" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
+                <input formControlName="username" class="form-control" type="text" placeholder="Enter Username" autofocus>
                 <i class="fa-solid fa-user"></i>
               </div>
               <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-danger">*Username is Required</small>              
@@ -25,7 +25,7 @@
             <div class="form-group">
               <label class="control-label">Password</label>
               <div class="input-addon" [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">
-                <input formControlName="Password" id="password-field" class="form-control" [type]="type" placeholder="Password" autofocus>                
+                <input formControlName="password" id="password-field" class="form-control" [type]="type" placeholder="Password" autofocus>                
                   <i class="fa" [ngClass]="{'fa-eye': !hide, 'fa-eye-slash': hide}" (click)="toggleVisibility()"></i>                                
               </div>
               <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">*Password is Required</small>
@@ -42,14 +42,14 @@
                 <p><a href="/forgot-password" class="form-link">Forgot Password?</a></p>
               </div>
             </div>
-            </div>
-            <div class="form-group mb-0">
-              <div class="utility">
-                <p>Don't have a account? <a routerLink="/singup" class="form-link">Sign Up</a> </p>
-              </div>
-            </div>
+            </div>        
             <div class="form-group btn-container">
               <button class="btn btn-xl btn-primary" (click)="onSubmite()">Sign in</button>
+            </div>
+            <div class="form-group mb-0">
+              <div class="utility py-3">
+                <p>Don't have a account? <a routerLink="/singup" class="form-link">Sign Up</a> </p>
+              </div>
             </div>
           </form>
         </div>

@@ -10,15 +10,27 @@ export class NewpasswordComponent {
 
   hide = true;
   type = "password"; 
-  newpasForm !: FormGroup<{ password: FormControl<string | null>; }>;
 
+  hide2 = true;
+  type2 = "password";
+
+
+  // newpasForm !: FormGroup<{ password: FormControl<string | null>; }>;
+  // newpasForm !: FormGroup<{ cpassword: FormControl<string | null>; }>;
   toggleVisibility(): void {
     this.hide = !this.hide;
     this.type == "password" ? this.type ="text": this.type = "password"
   }
+  
+  toggleVisibility2(): void {
+    this.hide = !this.hide2;
+    this.type2 == "password" ? this.type2 ="text": this.type2 = "password"
+  
+    // this.show = !this.show;
+  } 
 
   
-  loginForm !: FormGroup;
+  newpasForm !: FormGroup;
 
 constructor(private fb:FormBuilder)
 {
@@ -29,7 +41,8 @@ ngOnInit(): void
 {
   this.newpasForm=this.fb.group({ 
 
-    password: ['',Validators.required]    
+    password: ['',Validators.required],
+    cpassword: ['',Validators.required]  
   })
 }
    

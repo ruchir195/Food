@@ -17,8 +17,7 @@ import { ContactusComponent } from './contactus/contactus.component';
 
 const routes: Routes = [
     {path:'header',component:HeaderComponent}
-  ,{path:'',component:LoginComponent}
-  ,{path:'login',component:LoginComponent}
+  ,{path:'',component:LoginComponent}  
   ,{path:'forgot-password',component:ForgotPasswordComponent}
   ,{path:'otp-validation',component:OTPValidationComponent}
   ,{path:'singup',component:SingupComponent}

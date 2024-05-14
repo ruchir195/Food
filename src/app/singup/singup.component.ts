@@ -14,6 +14,8 @@ export class SingupComponent {
 hide = true;
 type = "password"; 
 
+hide2 = true;
+type2 = "password";
 
 toggleVisibility(): void {
   this.hide = !this.hide;
@@ -23,6 +25,12 @@ toggleVisibility(): void {
 }   
 
 // -------------LogicforValidation--------------
+toggleVisibility2(): void {
+  this.hide = !this.hide2;
+  this.type2 == "password" ? this.type2 ="text": this.type2 = "password"
+
+  // this.show = !this.show;
+} 
 
 signForm !: FormGroup;
 

@@ -1,0 +1,29 @@
+  * {
+    background-size: 100%;    
+    /* background-color: red; */
+}
+
+.body {
+    background-size: 100%;
+}
+
+.card {    
+    height: 780px;
+    max-width: 1000px; 
+    padding: 20px;
+    margin: 4% auto 0; 
+    border-radius: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+}
+
+.title, h3 {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+.txt {
+    font-size: large;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
