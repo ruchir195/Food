@@ -5,7 +5,7 @@
           <div class="login-content-lt"></div>
           <div class="login-content-rt">
             <div class="login-box">
-            <form class="login-form" [formGroup]="loginForm">
+            <form class="login-form" [formGroup]="signForm">
               <div class="logo-wrapper">
                 <img src="../../assets/Images/logo.svg" alt="Rishabh Software">
                 <span>Meal Facility</span>
@@ -15,53 +15,53 @@
               
               <div class="form-group">
                 <label class="control-label">First Name</label>
-                <div class="input-addon" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
-                  <input formControlName="Username" class="form-control" type="text" placeholder="Enter First Name" autofocus>                  
+                <div class="input-addon" [class.error]="signForm.controls['firstname'].dirty && signForm.hasError('required','firstname')">
+                  <input formControlName="firstname" class="form-control" type="text" placeholder="Enter First Name" autofocus>                  
                 </div>
-                <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-danger">*Username is Required</small>              
+                <small *ngIf="signForm.controls['firstname'].dirty && signForm.hasError('required','firstname')" class="text-danger">*Firstname is Required</small>              
               </div>
             
               <div class="form-group">
                 <label class="control-label">Last Name</label>
-                <div class="input-addon" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
-                  <input formControlName="Username" class="form-control" type="text" placeholder="Enter Last" autofocus>                  
+                <div class="input-addon" [class.error]="signForm.controls['lastname'].dirty && signForm.hasError('required','lastname')">
+                  <input formControlName="lastname" class="form-control" type="text" placeholder="Enter Last" autofocus>                  
                 </div>
-                <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-danger">*Username is Required</small>              
+                <small *ngIf="signForm.controls['lastname'].dirty && signForm.hasError('required','lastname')" class="text-danger">*Lastname is Required</small>              
               </div>
             
               <div class="form-group">
                 <label class="control-label">Email</label>
-                <div class="input-addon" [class.error]="loginForm.controls['email'].dirty && loginForm.hasError('required','email')">
+                <div class="input-addon" [class.error]="signForm.controls['email'].dirty && signForm.hasError('required','email')">
                   <input formControlName="email" class="form-control" type="text" placeholder="Enter Email address" autofocus>                  
                 </div>
-                <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required','email')" class="text-danger">*Email is Required</small>              
+                <small *ngIf="signForm.controls['email'].dirty && signForm.hasError('required','email')" class="text-danger">*Email is Required</small>              
               </div>
 
               <div class="form-group">
                 <label class="control-label">User Name</label>
-                <div class="input-addon" [class.error]="loginForm.controls['username'].dirty && loginForm.hasError('required','username')">
-                  <input formControlName="Username" class="form-control" type="text" placeholder="Enter Username" autofocus>
+                <div class="input-addon" [class.error]="signForm.controls['username'].dirty && signForm.hasError('required','username')">
+                  <input formControlName="username" class="form-control" type="text" placeholder="Enter Username" autofocus>
                   <!-- <i class="fa-solid fa-user"></i> -->
                 </div>
-                <small *ngIf="loginForm.controls['username'].dirty && loginForm.hasError('required','username')" class="text-danger">*Username is Required</small>              
+                <small *ngIf="signForm.controls['username'].dirty && signForm.hasError('required','username')" class="text-danger">*Username is Required</small>              
               </div>
              
               <div class="form-group">
                 <label class="control-label">Password</label>
-                <div class="input-addon" [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">
-                  <input formControlName="Password" id="password-field" class="form-control" [type]="type" placeholder="Password" autofocus>                
+                <div class="input-addon" [class.error]="signForm.controls['password'].dirty && signForm.hasError('required','password')">
+                  <input formControlName="password" id="password-field" class="form-control" [type]="type" placeholder="Password" autofocus>                
                     <i class="fa" [ngClass]="{'fa-eye': !hide, 'fa-eye-slash': hide}" (click)="toggleVisibility()"></i>                                
                 </div>
-                <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">*Password is Required</small>
+                <small *ngIf="signForm.controls['password'].dirty && signForm.hasError('required','password')" class="text-danger">*Password is Required</small>
               </div>    
 
               <div class="form-group">
                 <label class="control-label">Confirm Password</label>
-                <div class="input-addon" [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required','password')">
-                  <input formControlName="Password" id="password-field" class="form-control" [type]="type" placeholder="Confrim Password" autofocus>                
+                <div class="input-addon" [class.error]="signForm.controls['cpassword'].dirty && signForm.hasError('required','cpassword')">
+                  <input formControlName="cpassword" id="password-field" class="form-control" [type]="type" placeholder="Confrim Password" autofocus>                
                     <i class="fa" [ngClass]="{'fa-eye': !hide, 'fa-eye-slash': hide}" (click)="toggleVisibility()"></i>                                
                 </div>
-                <small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required','password')" class="text-danger">*Password is Required</small>
+                <small *ngIf="signForm.controls['cpassword'].dirty && signForm.hasError('required','cpassword')" class="text-danger">*Confirm Password is Required</small>
               </div>
 
               <div class="d-flex align-items-center justify-content-between">

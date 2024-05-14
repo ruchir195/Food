@@ -9080,9 +9080,10 @@ pre {
     text-shadow: 0 1px #fff;
     hyphens: none
 }
-
 img {
-    max-width: 94%
+    /* max-width: 94% */
+    max-width: 185%;
+    margin: 10px 10px 10px -11px;
 }
 
 .text-wrap {

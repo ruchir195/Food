@@ -12,3 +12,11 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.pointer{
+    cursor: pointer;
+    margin: 15px 12px;
+}
+
+.hide{
+    display: none !important;
+}

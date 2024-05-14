@@ -24,7 +24,7 @@ toggleVisibility(): void {
 
 // -------------LogicforValidation--------------
 
-loginForm !: FormGroup;
+signForm !: FormGroup;
 
 constructor(private fb:FormBuilder)
 {
@@ -33,18 +33,22 @@ constructor(private fb:FormBuilder)
 
 ngOnInit(): void
 {
-this.loginForm=this.fb.group({  
-  username: ['',Validators.required],
-  password: ['',Validators.required],
-  email:['',[Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]]
+this.signForm=this.fb.group({  
+  firstname :['',Validators.required],
+  lastname:['',Validators.required],
+  email:['',[Validators.required,Validators.email,Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
+  username:['',Validators.required],
+  password:['',Validators.required],
+  cpassword:['',Validators.required],
+  
 })
 }
  
 
 onSubmite(){
-  if(this.loginForm.valid)
+  if(this.signForm.valid)
     {
-      console.log(this.loginForm.value);
+      console.log(this.signForm.value);
       alert("Form Login successfully.")
       //send data to database
     }
@@ -52,7 +56,7 @@ onSubmite(){
     {
       console.log("form is not valid");
       //throw a error using toaster and with  required fileds
-      this.validdateAllFromFileds(this.loginForm)
+      this.validdateAllFromFileds(this.signForm)
       alert("Your form is invalid");
     } 
 }
