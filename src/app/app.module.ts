@@ -23,6 +23,8 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { TermsandconditionComponent } from './termsandcondition/termsandcondition.component';
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { ContactusComponent } from './contactus/contactus.component';
+import { HttpClientModule } from '@angular/common/http';
+import { NgToastModule } from 'ng-angular-popup';
 
 @NgModule({
   declarations: [
@@ -53,6 +55,8 @@ import { ContactusComponent } from './contactus/contactus.component';
     NgxUiLoaderModule,
     NgbNavModule,
     NgbModule,
+    HttpClientModule,
+    NgToastModule,
 
     NgxUiLoaderHttpModule.forRoot({showForeground: true}),
     NgxUiLoaderRouterModule.forRoot({showForeground: true}),

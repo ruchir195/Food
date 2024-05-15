@@ -194,23 +194,52 @@
   }
   .fa-solid
   {
-    position:absolute;
+    /* position:absolute; */
     top: 28%;
     right: 4%;
     cursor: pointer;
   }
   .fa-eye .fa
   {
-    position: absolute;
+    /* position: absolute; */
     top: 28%;
     right: 4%; 
     cursor: pointer;  
   }
   .fa 
   {
-    position: absolute;
+    /* position: absolute; */
     top: 28%;
     right: 4%; 
     cursor: pointer;
   }
+
+
+
+  .input-field{
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #ddd;
+    color: #4343ff;
+    height: 57px;
+  }
+  
+  .input-field.error{
+    border:  1px solid red;
+    color: red;
+  }
+  
+  input[type="text"],
+  input[type="password"]{
+    border: none;
+    outline: none;   
+    box-shadow: none;
+    width: 100%;
+    
+  }
+
+
   

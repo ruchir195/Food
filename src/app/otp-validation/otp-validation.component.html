@@ -10,14 +10,17 @@
             </div>
             <h3 class="otp-head">Forgot Password</h3>
             <p class="otp-text">Enter OTP and Create new password for your account.</p>
-            <div class="form-group">
+            <div class="form-group pt-3">
               <label class="control-label">Enter OTP</label>
-              <div class="input-addon" [class.error]="otpfrom.controls['password'].dirty && otpfrom.hasError('required','password')">
-                <input formControlName="password" id="password-field" class="form-control"  [type]="type" placeholder="Enter OTP" autofocus>
-                <i class="fa" [ngClass]="{'fa-eye': !hide, 'fa-eye-slash': hide}" (click)="toggleVisibility()"></i>
-              </div> 
-              <small *ngIf="otpfrom.controls['password'].dirty && otpfrom.hasError('required','password')" class="text-danger">*OTP is Required</small>             
-            </div>            
+              <div class="input-field"
+                  [class.error]="otpfrom.controls['otp'].dirty && otpfrom.hasError('required', 'otp')">
+                  <span class="fa fa-user p-2"></span>
+                  <input formControlName="otp" type="text" placeholder="otp">
+              </div>
+              <small
+              *ngIf="otpfrom.controls['otp'].dirty && otpfrom.hasError('required', 'otp')"
+              class="text-danger">*OTP is required</small>
+          </div>            
 
             <div class="d-flex align-items-center justify-content-between">
               <div class="form-group mb-0">              
@@ -25,7 +28,7 @@
             </div>
           
             <div class="form-group btn-container">
-              <button class="btn btn-xl btn-primary" routerLink="/newpassword">Submit</button>
+              <button (click)="onSubmit()" class="btn btn-xl" >Submit</button>
             </div>
           </form>
         </div>
