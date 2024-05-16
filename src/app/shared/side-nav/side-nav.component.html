@@ -1,0 +1,63 @@
+<div>
+    <div id="header_top" class="header_top" style="border-right:dotted 1px white;">
+        <div class="container" style="background: linear-gradient(195deg,  rgb(26, 26, 87),#f3f6f5);">
+            <div class="hleft">
+                <div class="dropdown">
+                    <a ui-serf="users" class="nav-link icon user_btn resizeupto765" title="Software"><img src="../../assets/Images/logo-white.svg" alt="logo" /></a>
+                </div>
+            </div>
+            <div class="hright">
+                <div class="dropdown">
+                    <a href="javascript:void(0)" id="toggle-open-icon" class="nav-link icon menu_toggle open-menu"
+                        (click)="openMenuFunction()" title="Open Menu"><i class="fa-solid fa-caret-right"></i></a>
+                    <a href="javascript:void(0)" id="toggle-close-icon" class="nav-link icon menu_toggle close-menu hide" 
+                        (click)="closeMenuFunction()" title="Close Menu"><i class="fa-solid fa-caret-left"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- start Main menu -->
+    <div id="left-sidebar" class="sidebar" style="background: linear-gradient(195deg,  rgb(26, 26, 87),#f3f6f5);">
+        <div class="d-flex justify-content-between brand_name">
+            <!--<h5 class="brand-name text-center" style="width:100%;">-->
+            <!--<img src="images/logo.png" style="max-height:70px;" />-->
+        </div>
+        <div class="tab-content" style="padding: 0px; margin-top: 0px;">
+            <div class="tab-pane fade active show" id="all-tab">
+                <nav class="sidebar-nav">
+                    <ul class="metismenu ci-effect-1">
+
+                        <!-- <li class="g_heading">System Menu</li> -->
+                        <li>
+                            <ul>
+                             
+                                <li routerLink="/dashboard/aboutus" class="pointer" routerLinkActive="active" style="color: white;">
+                                    <div title="About Us"><i class="fa-solid fa-address-card" style="color: white;"></i>
+                                        <span style="font-size: 16px; padding-top: 4px; font-family: 'Times New Roman', Times, serif;">About Us</span>
+                                    </div>
+                                </li>
+                                <li routerLink="/dashboard/contactus" class="pointer" routerLinkActive="active" style="color: white;">
+                                    <div title="Contact Us"><i class="fa-solid fa-address-book" style="color: white;"></i>
+                                        <span style="font-size: 16px; padding-top: 4px; font-family: 'Times New Roman', Times, serif;">Contact Us</span>
+                                    </div>
+                                </li>
+                                <li routerLink="/dashboard/privacy-policy" class="pointer" routerLinkActive="active" style="color: white;">
+                                    <div title="Privacy Policy"><i class="fa-solid fa-shield-halved" style="color: white;"></i>
+                                        <span style="font-size: 16px; padding-top: 4px; font-family: 'Times New Roman', Times, serif;">Privacy Policy</span>
+                                    </div>
+                                </li>
+                                <li routerLink="/dashboard/termsandcondition" class="pointer" routerLinkActive="active" style="color: white;">
+                                    <div title="Terms & Condition"><i class="fa-brands fa-teamspeak" style="color: white;"></i>
+                                        <span style="font-size: 16px; padding-top: 4px; font-family: 'Times New Roman', Times, serif;">Terms & Condition</span>
+                                    </div>
+                                </li>    
+                            </ul>
+                        </li>
+                        
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

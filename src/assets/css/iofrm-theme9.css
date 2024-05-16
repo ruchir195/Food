@@ -14,9 +14,9 @@
 /* -----------------------------------
     1 - General Styles
 ------------------------------------*/
-.form-body {
+/* .form-body {
     background-color: #064E89;
-}
+} */
 
 .website-logo {
     display: none;
@@ -84,7 +84,7 @@
 }
 
 .form-holder {
-    margin-left: 550px;
+    margin-left: 250px;
 }
 
 .form-holder .form-content ::-webkit-input-placeholder {
@@ -431,6 +431,7 @@
 
 .form-body.without-side .img-holder .info-holder img {
     display: inline-block;
+  
 }
 
 .form-body.without-side .form-content .page-links a:after {
