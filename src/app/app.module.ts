@@ -29,7 +29,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LogoutComponent } from './pages/logout/logout.component';
-// import { HomeComponent } from './layouts/home/home.component';
+import { HomeComponent } from './pages/home/home.component';
 // import { MatErrorModule } from '@angular/material/core';
 
 
@@ -42,6 +42,7 @@ import { LogoutComponent } from './pages/logout/logout.component';
         QuickBookComponent,
         CancelBookingComponent,
         LogoutComponent,
+        HomeComponent,
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent],

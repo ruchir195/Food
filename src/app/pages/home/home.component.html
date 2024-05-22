@@ -1,0 +1,81 @@
+
+<div class="d-flex">
+    <div class="calender">
+      <div class="d-flex py-3">
+
+        <div class="px-3">
+          <button (click)="openbooking()" class="py-2 btn btn-danger">
+            View Booking
+          </button>
+        </div>
+        <div class="px-3">
+          <button (click)="openQuickBooking()" class="py-2 btn btn-danger" [disabled]="isQuickBookingDisabled">
+            Quick Booking
+          </button>
+        </div>
+
+        <div class="px-3">
+          <button (click)="cancelBooking()" class="py-2 btn btn-danger" [disabled]="isCancelBookingDisabled">
+            Cancel Booking
+          </button>
+        </div>
+
+      </div>
+
+      <mat-card class="demo-inline-calendar-card cal">
+
+        <mat-calendar #calendar [dateClass]="dateClass" [(selected)]="selected" class="cal"
+          [dateFilter]="disablePastDatesFilter" (selectedChange)="onDateSelected($event)"></mat-calendar>
+      </mat-card>
+    </div>
+
+
+
+
+
+
+
+    <div class="menu">
+      <mat-card class="bgMenu">
+        <mat-card-content>
+          <mat-list>
+            <div class="d-flex px-3 lunch">
+              <div>
+                <h1 class="px-4">Lunch</h1>
+                <ul>
+                  <li *ngFor="let item of menu?.lunch">{{ item }}</li>
+                </ul>
+              </div>
+              <div class="px-4">
+                <h1 class="dinner">Dinner</h1>
+                <ul class="dinner">
+                  <li *ngFor="let item of menu?.dinner">{{ item }}</li>
+                </ul>
+              </div>
+            </div>
+          </mat-list>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+  </div>
+
+  <div class="calender">
+    <div class="d-flex px-5">
+      <div class="px-5 pt-3 pb-5">
+        <button (click)="openDialog()" class="py-2 btn btn-danger" [disabled]="isMealBookingDisabled">
+          Book a Meal
+        </button>
+      </div>
+
+
+      <div class="  pt-3 pb-5">
+        <button (click)="onGenerateQR()" class="py-2 btn btn-danger">
+          Generate QR code
+        </button>
+      </div>
+    </div>
+
+
+  </div>

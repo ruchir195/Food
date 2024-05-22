@@ -71,7 +71,7 @@ onLogin(){
             this.userStore.setRoleForStore(tokenPayload.role);
             
             this.toast.success({detail:"SUCCESS", summary:"Login successfully.", duration:5000});
-            this.router.navigate(['dashboard']);
+            this.router.navigate(['/dashboard/home']);
             
           }),
           error:(err=>{

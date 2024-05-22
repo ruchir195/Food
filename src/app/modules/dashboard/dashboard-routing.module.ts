@@ -4,12 +4,12 @@ import { AboutusComponent } from 'src/app/pages/aboutus/aboutus.component';
 import { ChangepasswordComponent } from 'src/app/pages/changepassword/changepassword.component';
 import { ContactusComponent } from 'src/app/pages/contactus/contactus.component';
 import { ForgotPasswordComponent } from 'src/app/pages/forgot-password/forgot-password.component';
-// import { HomeComponent } from 'src/app/pages/home/home.component';
 import { NewpasswordComponent } from 'src/app/pages/newpassword/newpassword.component';
 import { OTPValidationComponent } from 'src/app/pages/otp-validation/otp-validation.component';
 import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-policy.component';
 import { SingupComponent } from 'src/app/pages/singup/singup.component';
 import { TermsandconditionComponent } from 'src/app/pages/termsandcondition/termsandcondition.component';
+import { HomeComponent } from 'src/app/pages/home/home.component';
 
 const routes: Routes = [
   {path:'forgot-password',component:ForgotPasswordComponent},
@@ -43,6 +43,10 @@ const routes: Routes = [
       {
         component:TermsandconditionComponent,
         path:'termsandcondition'
+      },
+      {
+        component:HomeComponent,
+        path:'home'
       }
      
     ]
