@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
+import { QrCodeComponent } from './pages/qr-code/qr-code.component';
 
 
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
       { path:'dashboard', loadChildren: () => import('../app/modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
     ]
   },
+  {path:'qrcode', component: QrCodeComponent},
   
   ];
   

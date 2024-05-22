@@ -17,6 +17,18 @@ import { NewpasswordComponent } from 'src/app/pages/newpassword/newpassword.comp
 import { OTPValidationComponent } from 'src/app/pages/otp-validation/otp-validation.component';
 import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-policy.component';
 import { TermsandconditionComponent } from 'src/app/pages/termsandcondition/termsandcondition.component';
+import { MatListModule } from '@angular/material/list';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCardModule } from '@angular/material/card';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { AddBookingComponent } from 'src/app/pages/add-booking/add-booking.component';
+import { MatButtonModule } from '@angular/material/button';
+// import { MatErrorModule } from '@angular/material/core';
+
 
 
 @NgModule({
@@ -31,7 +43,8 @@ import { TermsandconditionComponent } from 'src/app/pages/termsandcondition/term
     NewpasswordComponent,
     OTPValidationComponent,
     PrivacyPolicyComponent,
-    TermsandconditionComponent
+    TermsandconditionComponent,
+    // AddBookingComponent
   ],
   imports: [
     CommonModule,
@@ -52,6 +65,17 @@ import { TermsandconditionComponent } from 'src/app/pages/termsandcondition/term
     // MatFormFieldModule,
     // MatInputModule,
     // MatTabsModule
+    MatCardModule,
+    MatListModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatDialogModule,
+    MatRadioModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    
   ]
 })
 export class DashboardModule { }

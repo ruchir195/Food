@@ -13,14 +13,37 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgToastModule } from 'ng-angular-popup';
 import { SharedModule } from "./shared/shared.module";
 import { DashboardModule } from './modules/dashboard/dashboard.module';
-
+import { QrCodeComponent } from './pages/qr-code/qr-code.component';
+import { QRCodeModule } from 'angularx-qrcode';
+import { MatNativeDateModule } from '@angular/material/core';
+import {MatListModule} from '@angular/material/list';
+import { DatePipe } from '@angular/common';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { AddBookingComponent } from './pages/add-booking/add-booking.component';
+import { ViewBookingComponent } from './pages/view-booking/view-booking.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
+import { QuickBookComponent } from './pages/quick-book/quick-book.component';
+import { CancelBookingComponent } from './pages/cancel-booking/cancel-booking.component';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { LogoutComponent } from './pages/logout/logout.component';
+// import { HomeComponent } from './layouts/home/home.component';
+// import { MatErrorModule } from '@angular/material/core';
 
 
 @NgModule({
     declarations: [
         AppComponent,
+        QrCodeComponent,
+        AddBookingComponent,
+        ViewBookingComponent,
+        QuickBookComponent,
+        CancelBookingComponent,
+        LogoutComponent,
     ],
-    providers: [],
+    providers: [DatePipe],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,
@@ -39,7 +62,21 @@ import { DashboardModule } from './modules/dashboard/dashboard.module';
         NgxUiLoaderHttpModule.forRoot({ showForeground: true }),
         NgxUiLoaderRouterModule.forRoot({ showForeground: true }),
         SharedModule,
-        DashboardModule
+        DashboardModule,
+        MatListModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+        QRCodeModule,
+        MatDialogModule,
+        MatRadioModule, 
+        MatButtonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        // MatErrorModule
+
+
+        
     ]
 })
 export class AppModule { }

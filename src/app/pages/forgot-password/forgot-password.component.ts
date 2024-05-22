@@ -42,13 +42,13 @@ export class ForgotPasswordComponent{
               console.log(res);
               localStorage.setItem("email",this.forgotFrom.value.email);
               localStorage.setItem("otp",res.otp);
-              this.toast.success({detail:"SUCCESS", summary:res.message, duration:5000});
+              this.toast.success({detail:"SUCCESS", summary:res.Message, duration:5000});
               this.forgotFrom.reset();
               this.router.navigate(['otp-validation']);
             },
             error:(err) => {
               // alert(err?.error.message);
-              this.toast.error({detail:"ERROR", summary:"something went wrong", duration:5000});
+              this.toast.error({detail:"ERROR", summary:err?.error.message, duration:5000});
             }
           })
             
@@ -58,6 +58,7 @@ export class ForgotPasswordComponent{
           console.log("form is not valid");
           //throw a error using toaster and with  required fileds
           ValidateForm.validateAllFormFields(this.forgotFrom)
+          this.toast.warning({detail:"ERROR", summary:"Something went wrong", duration:5000});
           alert("Your form is invalid");
         } 
     }

@@ -1,0 +1,21 @@
+<h2>logout</h2>
+
+<form>
+  <div class="form-group">
+    <p>Are you sure you want to logout?</p>
+    <!-- <label for="reason">Reason for cancellation</label>
+    <input id="reason" formControlName="reason" type="text" class="form-control">
+    <div *ngIf="cancelForm?.get('reason')?.invalid && cancelForm?.get('reason')?.touched">
+      Reason is required.
+    </div> -->
+  </div>
+
+  <div class="form-actions">
+    <button mat-button (click)="closeForm()">No</button>
+    <button mat-raised-button color="warn" type="submit" (click)="logout()">
+      Yes
+    </button>
+  </div>
+</form>
+
+<!-- <button mat-raised-button (click)="openCancel(cancelForm)">Are you want to Cancel Meal?</button> -->

@@ -280,7 +280,7 @@ body {
 }
 
 .menu:hover {
-    background-color: #0c8241 !important;
+    /* background-color: #0c8241 !important; */
     color:white !important;
     border-radius: 5px;
 }

@@ -126,9 +126,11 @@
                   <input formControlName="password" [type]="type" placeholder="Password">
                   <span class="fa" [ngClass]="{'fa-eye': !hide, 'fa-eye-slash': hide}" (click)="toggleVisibility()"></span>
               </div>
+             
               <small
               *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required', 'password')"
               class="text-danger">*Password is Required</small>
+              <p>Password must be at least 8 characters long, with at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &).</p>
           </div>
           
 
