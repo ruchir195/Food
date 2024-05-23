@@ -71,7 +71,7 @@ onSubmit(){
             },
             error:(err) => {
               // alert(err?.error.message);
-              this.toast.error({detail:"ERROR", summary:"something went wrong", duration:5000});
+              this.toast.error({detail:"ERROR", summary:err.error.message, duration:5000});
             }
           })
         }
@@ -81,10 +81,33 @@ onSubmit(){
       }
       else
       {
+
+        if (this.newpasForm.controls['password'].invalid && this.newpasForm.controls['cpassword'].invalid) {
+          this.toast.warning({ detail: 'ERROR', summary: 'Please enter a Password and confirm Password', duration: 5000 });
+        } else {
+          if (this.newpasForm.controls['password'].invalid) {
+            if (this.newpasForm.controls['password'].errors?.['required']) {
+              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a password', duration: 5000 });
+            } else if (this.newpasForm.controls['password'].errors?.['pattern']) {
+              this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
+            }
+          }
+
+          if (this.newpasForm.controls['cpassword'].invalid) {
+            if (this.newpasForm.controls['cpassword'].errors?.['required']) {
+              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a Confirm password', duration: 5000 });
+            } else if (this.newpasForm.controls['cpassword'].errors?.['pattern']) {
+              this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
+            }
+          }
+        }
+
+
+
         console.log("form is not valid");
         //throw a error using toaster and with  required fileds
         ValidateForm.validateAllFormFields(this.newpasForm)
-        alert("Your form is invalid");
+        // alert("Your form is invalid");
       } 
   }
 }

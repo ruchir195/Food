@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { QrCodeComponent } from './pages/qr-code/qr-code.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 const routes: Routes = [
@@ -16,10 +17,10 @@ const routes: Routes = [
   
   {
     path: '', component: DashboardComponent, children: [
-      { path:'dashboard', loadChildren: () => import('../app/modules/dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path:'dashboard', loadChildren: () => import('../app/modules/dashboard/dashboard.module').then(m => m.DashboardModule), canActivate:[AuthGuard] },
     ]
   },
-  {path:'qrcode', component: QrCodeComponent},
+  {path:'qrcode', component: QrCodeComponent, canActivate:[AuthGuard]},
   
   ];
   

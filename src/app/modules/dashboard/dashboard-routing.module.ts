@@ -10,6 +10,7 @@ import { PrivacyPolicyComponent } from 'src/app/pages/privacy-policy/privacy-pol
 import { SingupComponent } from 'src/app/pages/singup/singup.component';
 import { TermsandconditionComponent } from 'src/app/pages/termsandcondition/termsandcondition.component';
 import { HomeComponent } from 'src/app/pages/home/home.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
   {path:'forgot-password',component:ForgotPasswordComponent},
@@ -18,15 +19,18 @@ const routes: Routes = [
     path:'', children:[
       {
         component:AboutusComponent ,
-        path:'aboutus'
+        path:'aboutus',
+        canActivate:[AuthGuard]
       },
       {
         component:ChangepasswordComponent,
-        path:'changepassword'
+        path:'changepassword',
+        canActivate:[AuthGuard]
       },
       {
         component:ContactusComponent,
-        path: 'contactus'
+        path: 'contactus',
+        canActivate:[AuthGuard]
       },
       {
         component:NewpasswordComponent,
@@ -38,15 +42,18 @@ const routes: Routes = [
       },
       {
         component:PrivacyPolicyComponent,
-        path:'privacy-policy'
+        path:'privacy-policy',
+        canActivate:[AuthGuard]
       },
       {
         component:TermsandconditionComponent,
-        path:'termsandcondition'
+        path:'termsandcondition',
+        canActivate:[AuthGuard]
       },
       {
         component:HomeComponent,
-        path:'home'
+        path:'home',
+        canActivate:[AuthGuard]
       }
      
     ]

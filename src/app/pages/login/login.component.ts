@@ -61,7 +61,7 @@ onLogin(){
         localStorage.setItem('email',this.loginForm.value.username);
         this.auth.login(this.loginForm.value).subscribe({
           next:(res=>{    
-            // console.log(res);
+            console.log("username: ",res);
             // alert("Login successfully.")
             this.loginForm.reset();
             this.auth.storeToken(res.accessToken);

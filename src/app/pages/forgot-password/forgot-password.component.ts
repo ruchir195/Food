@@ -33,7 +33,7 @@ export class ForgotPasswordComponent{
   onSubmit(){
         if(this.forgotFrom.valid){
           console.log(this.forgotFrom.value);
-          alert("OTP send on given Email")
+          // alert("OTP send on given Email")
           //send data to database
           this.auth.forgetPassword(this.forgotFrom.value)
           .subscribe({
@@ -42,7 +42,7 @@ export class ForgotPasswordComponent{
               console.log(res);
               localStorage.setItem("email",this.forgotFrom.value.email);
               localStorage.setItem("otp",res.otp);
-              this.toast.success({detail:"SUCCESS", summary:res.Message, duration:5000});
+              this.toast.success({detail:"SUCCESS", summary:res.message, duration:5000});
               this.forgotFrom.reset();
               this.router.navigate(['otp-validation']);
             },
@@ -55,11 +55,26 @@ export class ForgotPasswordComponent{
         }
         else
         {
+
+
+
+          if (this.forgotFrom.controls['email'].invalid) {
+            this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address', duration: 5000 });
+          } else {
+            if (this.forgotFrom.controls['email'].invalid) {
+              if (this.forgotFrom.controls['email'].errors?.['required']) {
+                this.toast.warning({ detail: 'ERROR', summary: 'Please enter an email address', duration: 5000 });
+              } else if (this.forgotFrom.controls['email'].errors?.['email']) {
+                this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address', duration: 5000 });
+              }
+            }
+          }
+    
           console.log("form is not valid");
           //throw a error using toaster and with  required fileds
           ValidateForm.validateAllFormFields(this.forgotFrom)
-          this.toast.warning({detail:"ERROR", summary:"Something went wrong", duration:5000});
-          alert("Your form is invalid");
+          // this.toast.warning({detail:"ERROR", summary:"Something went wrong", duration:5000});
+          // alert("Your form is invalid");
         } 
     }
      

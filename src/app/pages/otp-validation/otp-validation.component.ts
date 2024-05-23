@@ -79,10 +79,23 @@ onSubmit(){
       }
       else
       {
+
+        if (this.otpfrom.controls['otp'].invalid) {
+          this.toast.warning({ detail: 'ERROR', summary: 'Please enter a OTP', duration: 5000 });
+        } else {
+          if (this.otpfrom.controls['otp'].invalid) {
+            if (this.otpfrom.controls['otp'].errors?.['required']) {
+              this.toast.warning({ detail: 'ERROR', summary: 'Please enter OTP', duration: 5000 });
+            } else if (this.otpfrom.controls['otp'].errors?.['otp']) {
+              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid OTP', duration: 5000 });
+            }
+          }
+        }
+        
         console.log("form is not valid");
         //throw a error using toaster and with  required fileds
         ValidateForm.validateAllFormFields(this.otpfrom)
-        alert("Your form is invalid");
+        // alert("Your form is invalid");
       } 
   }
 
