@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { SafeValue } from '@angular/platform-browser';
-import { QRCodeModule } from 'angularx-qrcode';
 import { AuthService } from '../../services/auth.service';
 import {CoupenService} from '../../services/coupen.service'
 import { NgToastService } from 'ng-angular-popup';

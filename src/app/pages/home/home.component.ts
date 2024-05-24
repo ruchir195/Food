@@ -169,7 +169,7 @@ export class HomeComponent implements OnInit {
 
     console.log(highlightDate);
 
-    return highlightDate ? 'special-date' : '';
+    return highlightDate ? 'special-dte' : '';
   };
 
 

@@ -1,0 +1,9 @@
+<div class="notification-container">
+    <input [(ngModel)]="notificationInput" placeholder="Enter notification" />
+    <button (click)="addNotification()">Add Notification</button>
+    <span class="bell-icon" (click)="openNotifications($event)">
+      <i class="material-icons">notifications</i>
+      <span *ngIf="notificationCount > 0" class="notification-count">{{ notificationCount }}</span>
+    </span>
+  </div>
+  

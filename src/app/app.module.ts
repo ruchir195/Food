@@ -30,7 +30,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { HomeComponent } from './pages/home/home.component';
+import { NotificationComponent } from './pages/notification/notification.component';
+import { NotificationDialogComponent } from './pages/notification-dialog/notification-dialog.component';
 // import { MatErrorModule } from '@angular/material/core';
+import {MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -43,6 +46,8 @@ import { HomeComponent } from './pages/home/home.component';
         CancelBookingComponent,
         LogoutComponent,
         HomeComponent,
+        NotificationComponent,
+        NotificationDialogComponent,
     ],
     providers: [DatePipe],
     bootstrap: [AppComponent],
@@ -74,6 +79,7 @@ import { HomeComponent } from './pages/home/home.component';
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
+        MatIconModule,
         // MatErrorModule
 
 

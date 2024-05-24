@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import ValidateForm from 'src/app/helpers/validateForm';
 import { AuthService } from 'src/app/services/auth.service';
+import { NotificationService } from 'src/app/services/notification.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 
 @Component({
@@ -29,6 +30,7 @@ hideNew= true;
 hideconfirm= true;
 typeOld="password"
 typeNew="password"
+storedMessage: string | undefined;
 // newpasFrom !: FormGroup
 // newpasForm !: FormGroup<{ password: FormControl<string | null>; }>;
 
@@ -36,7 +38,8 @@ constructor(  private fb : FormBuilder,
   private auth: AuthService,
    private router: Router,
  private toast: NgToastService,
- private userStore: UserStoreService)
+ private userStore: UserStoreService,
+ private notification: NotificationService) 
 {
 
 }
@@ -73,14 +76,55 @@ ngOnInit(): void
             next:(res) => {
               // alert(res.message);
               this.toast.success({detail:"SUCCESS", summary:res.message, duration:5000});
+              this.storedMessage = res.message;
               this.changePasswordForm.reset();
-              this.router.navigate(['login']);
+              
+
+
+
+
+              console.log("STMSG: ",this.storedMessage);
+               // Trigger the notification after the storedMessage is set
+               this.notification.notification(this.storedMessage)
+               .subscribe({
+                 next: (notifRes) => {
+                   this.toast.success({ detail: "SUCCESS", summary: "Ruchur parmar", duration: 5000 });
+                 },
+                 error: (notifErr) => {
+                   this.toast.error({ detail: "ERROR", summary: notifErr?.error.message, duration: 5000 });
+                 }
+               });
+               this.router.navigate(['login']);
             },
             error:(err) => {
               // alert(err?.error.message);
               this.toast.error({detail:"ERROR", summary:err?.error.message, duration:5000});
             }
           })
+
+          // ------------notification------------
+          
+          // console.log(this.storedMessage);
+          // this.notification.notification(this.storedMessage)
+          // .subscribe({
+          //   next:(res) => {
+          //     // alert(res.message);
+          //     this.toast.success({detail:"SUCCESS", summary:res.message, duration:5000});
+          //     this.changePasswordForm.reset();
+          //     this.router.navigate(['login']);
+          //   },
+          //   error:(err) => {
+          //     // alert(err?.error.message);
+          //     this.toast.error({detail:"ERROR", summary:err?.error.message, duration:5000});
+          //   }
+          // })
+
+
+
+
+
+
+
         }else{
           this.toast.error({detail:"ERROR", summary:"password and confirm password not match", duration:5000});
           // alert("password and confirm password not match");
