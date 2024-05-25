@@ -25,7 +25,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { AddBookingComponent } from 'src/app/pages/add-booking/add-booking.component';
+import { AddBookingComponent } from 'src/app/component/add-booking/add-booking.component';
 import { MatButtonModule } from '@angular/material/button';
 // import { MatErrorModule } from '@angular/material/core';
 
@@ -44,7 +44,7 @@ import { MatButtonModule } from '@angular/material/button';
     OTPValidationComponent,
     PrivacyPolicyComponent,
     TermsandconditionComponent,
-    // AddBookingComponent
+    //AddBookingComponent
   ],
   imports: [
     CommonModule,

@@ -5,13 +5,13 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UserStoreService } from 'src/app/services/user-store.service';
 import menuData from '../../../assets/json/menuData.json'
 import { MatDialog } from '@angular/material/dialog';
-import { AddBookingComponent } from 'src/app/pages/add-booking/add-booking.component';
-import { ViewBookingComponent } from 'src/app/pages/view-booking/view-booking.component';
-import { QuickBookComponent } from 'src/app/pages/quick-book/quick-book.component';
-import { CancelBookingComponent } from 'src/app/pages/cancel-booking/cancel-booking.component';
+import { AddBookingComponent } from 'src/app/component/add-booking/add-booking.component';
+import { ViewBookingComponent } from 'src/app/component/view-booking/view-booking.component';
+import { QuickBookComponent } from 'src/app/component/quick-book/quick-book.component';
+import { CancelBookingComponent } from 'src/app/component/cancel-booking/cancel-booking.component';
 import { SafeValue } from '@angular/platform-browser';
 import { CoupenService } from 'src/app/services/coupen.service';
-import { QrCodeComponent } from 'src/app/pages/qr-code/qr-code.component';
+import { QrCodeComponent } from 'src/app/component/qr-code/qr-code.component';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 
 
