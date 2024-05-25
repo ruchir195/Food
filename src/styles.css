@@ -20,3 +20,11 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .hide{
     display: none !important;
 }
+
+
+::ng-deep.special-date {
+    background-color: yellow;
+    border-radius: 50%;
+    padding: 2px;
+    color: white;
+  }

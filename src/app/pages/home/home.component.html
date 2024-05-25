@@ -24,7 +24,7 @@
 
       <mat-card class="demo-inline-calendar-card cal">
 
-        <mat-calendar #calendar [dateClass]="dateClass" [(selected)]="selected" class="cal"
+        <mat-calendar [dateClass]="dateClass()" [(selected)]="selected" class="cal"
           [dateFilter]="disablePastDatesFilter" (selectedChange)="onDateSelected($event)"></mat-calendar>
       </mat-card>
     </div>

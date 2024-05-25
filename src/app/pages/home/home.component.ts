@@ -55,16 +55,13 @@ export class HomeComponent implements OnInit {
 
   
   // Example array of dates to highlight
-  datesToHighlight = [
-    '2024-05-23T18:30:00.000Z',
-    '2024-05-24T18:30:00.000Z',
-    '2024-05-25T18:30:00.000Z',
-    '2024-05-26T18:30:00.000Z',
-    '2024-05-27T18:30:00.000Z',
-    '2024-05-28T18:30:00.000Z',
-    '2024-05-29T18:30:00.000Z',
-    '2024-05-20T18:30:00.000Z',
-  ];
+  startDate = new Date('2024-05-20T18:30:00.000Z');
+  endDate = new Date('2024-05-28T18:30:00.000Z');
+
+  datesToHighlight: string[] = this.generateDatesInRange(
+    this.startDate,
+    this.endDate
+  );
 
   constructor(private datePipe: DatePipe,private dateAdapter: DateAdapter<Date> , private auth: AuthService, private userStore: UserStoreService,  private dialogRef : MatDialog, private coupen: CoupenService){}
 
@@ -157,20 +154,35 @@ export class HomeComponent implements OnInit {
 
 
 
-  dateClass = (date: Date): MatCalendarCellCssClasses => {
-    const highlightDate = this.datesToHighlight
-      .map((strDate) => new Date(strDate))
-      .some(
-        (d) =>
-          d.getDate() === date.getDate() &&
-          d.getMonth() === date.getMonth() &&
-          d.getFullYear() === date.getFullYear()
-      );
+  dateClass() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      if (date.getDay() === 0 || date.getDay() === 6) {
+        return '';
+      }
 
-    console.log(highlightDate);
+      const highlightDate = this.datesToHighlight
+        .map((strDate) => new Date(strDate))
+        .some(
+          (d) =>
+            d.getDate() === date.getDate() &&
+            d.getMonth() === date.getMonth() &&
+            d.getFullYear() === date.getFullYear()
+        );
 
-    return highlightDate ? 'special-dte' : '';
-  };
+      return highlightDate ? 'special-date' : '';
+    };
+  }
+
+  // Function to generate dates between start and end date
+  generateDatesInRange(startDate: Date, endDate: Date): string[] {
+    const dates: string[] = [];
+    let currentDate = startDate;
+    while (currentDate <= endDate) {
+      dates.push(currentDate.toISOString());
+      currentDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000); // Add one day
+    }
+    return dates;
+  }
 
 
 

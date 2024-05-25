@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
+import { BookingService } from 'src/app/services/booking.service';
 
 @Component({
   selector: 'app-add-booking',
@@ -16,7 +19,10 @@ export class AddBookingComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    public dialogRef: MatDialogRef<AddBookingComponent>
+    public dialogRef: MatDialogRef<AddBookingComponent>,
+    private booking: BookingService,
+    private toast: NgToastService,
+    private router: Router,
   ) {
     // Set the minimum date to tomorrow
     const today = new Date();
@@ -54,7 +60,25 @@ export class AddBookingComponent implements OnInit {
   bookMeal(): void {
     if (this.bookingForm.valid) {
       console.log(this.bookingForm.value);
-      this.closeForm();
+      this.booking.book(this.bookingForm.value).subscribe({
+        next:(res=>{    
+          console.log("username: ",res);
+          // alert("Login successfully.")
+          this.bookingForm.reset();
+         
+          
+          this.toast.success({detail:"SUCCESS", summary:"Book Meal successfully.", duration:5000});
+          this.router.navigate(['/dashboard/home']);
+          this.closeForm();
+          
+        }),
+        error:(err=>{
+          console.log(err);
+          // alert(err.error.message);
+          this.toast.error({detail:"ERROR", summary:err.error.message, duration:5000});
+
+        })
+        })
     }
   }
 
