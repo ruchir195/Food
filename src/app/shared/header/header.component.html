@@ -10,9 +10,9 @@
           <div class="right">
               <div class="notification d-flex">
                 <div class="card-options">
-                  <span class="bell-icon" (click)="openNotifications()">
-                    <i class="fa-solid fa-bell" style="color: white;margin-top: 2px;"></i> 
-                    <span *ngIf="notificationCount > 0" class="notification-count"></span>
+                  <span class="bell-icon" (click)="openNotifications($event)">
+                    <i class="fa-solid fa-bell" style="color: white;margin-top: 2px;"></i>                     
+                    <span *ngIf="notificationCount > 0" class="notification-count">{{ notificationCount }}</span>
                   </span>   
                 </div>
 

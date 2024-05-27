@@ -15,6 +15,12 @@ import { UserStoreService } from 'src/app/services/user-store.service';
 export class ChangepasswordComponent {
   hide = true;
   type = "password"; 
+
+  hide1 = true;
+  type1 = "password";
+
+  hide2 = true;
+  type2 = "password";
   
 
   toggleVisibility(): void {    
@@ -22,7 +28,15 @@ export class ChangepasswordComponent {
     this.type == "password" ? this.type ="text": this.type = "password"
   }
   
-    
+  toggleVisibility1(): void {    
+    this.hide = !this.hide1;
+    this.type1 == "password" ? this.type1 ="text": this.type1 = "password"
+  }
+
+  toggleVisibility2(): void {    
+    this.hide = !this.hide2;
+    this.type2 == "password" ? this.type2 ="text": this.type2 = "password"
+  }
   
 changePasswordForm !: FormGroup;
 hideOld= true;

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NotificationDialogComponent } from 'src/app/component/notification-dialog/notification-dialog.component';
 import { LogoutComponent } from 'src/app/pages/logout/logout.component';
 import { AuthService } from 'src/app/services/auth.service';
+import { Notification } from 'src/app/models/notification.model';
 
 @Component({
   selector: 'app-header',
@@ -10,13 +11,11 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private auth: AuthService, private dialogRef: MatDialog) { }
+  constructor(private auth: AuthService, private dialogRef: MatDialog,public dialog: MatDialog) { }
 
   uniqueName: string | null = null;
   name: string | null = null;
 
-  notifications: string[] = [];
-  notificationCount: number = 0;
 
   ngOnInit(): void {
     this.uniqueName = this.auth.getUniqueName();
@@ -35,12 +34,14 @@ export class HeaderComponent implements OnInit {
         }
       );
     }
-  }
+    // ---notification------
+    const savedNotifications = localStorage.getItem('notifications');
+      if (savedNotifications) {
+        this.notifications = JSON.parse(savedNotifications);
+        this.notificationCount = this.notifications.filter(n => !n.read).length;
+      }
 
-
-
-
-  
+  }  
 
   logout(): void {
     this.auth.signOut();
@@ -50,30 +51,37 @@ export class HeaderComponent implements OnInit {
     this.dialogRef.open(LogoutComponent);
   }
 
-  openNotifications(): void {
-    this.dialogRef.open(NotificationDialogComponent);
-  }
 
-  // openNotifications(): void {
-  //   // event.stopPropagation();
-  //   const dialogRef = this.dialogRef.open(NotificationDialogComponent, {
-  //     width: '300px',
-  //     // data: { notifications: this.notifications }
-  //   });
+  // -------------Notification-----------------------
 
-    // dialogRef.componentInstance.notificationsCleared.subscribe(() => {
-    //   this.notifications = [];
-    //   this.notificationCount = 0;
-    // });
 
-    // dialogRef.componentInstance.dialogClosed.subscribe(() => {
-    //   this.notificationCount = this.notifications.length;
-    // });
+    notifications: Notification[] = [];  
+    notificationCount: number = 0;
 
-    // dialogRef.afterClosed().subscribe(() => {
-    //   this.notificationCount = this.notifications.length;
-    //   // Optionally save to localStorage
-    //   // localStorage.setItem('notifications', JSON.stringify(this.notifications));
-    // });
-  }
-// }
+  
+    openNotifications(event: MouseEvent): void {
+      event.stopPropagation();
+      const dialogRef = this.dialog.open(NotificationDialogComponent, {
+        width: '300px',
+        data: { notifications: this.notifications }
+      });
+  
+      dialogRef.componentInstance.notificationsCleared.subscribe(() => {
+        this.notificationCount = 0;
+      });
+  
+      dialogRef.componentInstance.dialogClosed.subscribe(() => {
+        this.notificationCount = this.notifications.filter(n => !n.read).length;
+        localStorage.setItem('notifications', JSON.stringify(this.notifications));
+      });
+  
+      dialogRef.afterClosed().subscribe(() => {
+        this.notificationCount = this.notifications.filter(n => !n.read).length;
+        localStorage.setItem('notifications', JSON.stringify(this.notifications));
+      });
+    }
+
+
+
+
+}
