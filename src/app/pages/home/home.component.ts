@@ -102,23 +102,24 @@ export class HomeComponent implements OnInit {
 
 
   onGenerateQR() {
-    this.dialogRef.open(QrCodeComponent);
+    const dialogRef = this.dialogRef.open(QrCodeComponent, {
+      disableClose: true, // Prevent dialog from closing on outside click
+    });
   }
-
 
   updateButtonStates() {
     const now = new Date();
     const hours = now.getHours();
 
-    if ((hours >= 9 && hours < 12) || (hours >= 17 && hours < 21)) {
-      this.isQuickBookingDisabled = true;
-      this.isCancelBookingDisabled = true;
-      this.isMealBookingDisabled = true;
-    } else {
-      this.isQuickBookingDisabled = false;
-      this.isCancelBookingDisabled = false;
-      this.isMealBookingDisabled = false;
-    }
+    // if ((hours >= 9 && hours < 12) || (hours >= 17 && hours < 21)) {
+    //   this.isQuickBookingDisabled = true;
+    //   this.isCancelBookingDisabled = true;
+    //   this.isMealBookingDisabled = true;
+    // } else {
+    //   this.isQuickBookingDisabled = false;
+    //   this.isCancelBookingDisabled = false;
+    //   this.isMealBookingDisabled = false;
+    // }
   }  
 
   onDateSelected(date: Date | null): void {

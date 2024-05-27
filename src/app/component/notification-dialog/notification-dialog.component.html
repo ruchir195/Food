@@ -1,13 +1,18 @@
 <h1 mat-dialog-title>Notifications</h1>
 <div mat-dialog-content>
-  <div *ngFor="let notification of data.notifications; let i = index" class="notification-item">
-    <p>{{ notification }}</p>
-    <button mat-icon-button (click)="removeNotification(i)">
-      <mat-icon>cancel</mat-icon>
-    </button>
-    <mat-divider></mat-divider>
-  </div>
+  <!-- <div *ngIf="notificationCount > 0; else noNotifications">
+    <p>{{ notifications }}</p> -->
+    <!-- <button mat-icon-button (click)="removeNotification(i)"> -->
+      <li *ngFor="let notification of notifications">
+        {{ notification.message }} - {{ notification.timeStamp | date:'mediumDate' }}
+        <mat-icon>cancel</mat-icon>
+        <mat-divider></mat-divider>
+      </li>
+      
+    <!-- </button> -->
+   
+  <!-- </div> -->
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="clearNotifications()">Clear</button>
+  <!-- <button mat-button (click)="clearNotifications()">Clear</button> -->
 </div>

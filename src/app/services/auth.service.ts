@@ -145,8 +145,8 @@ changePassword(changePasswordObj:any ){
   }
 
 
-  getUserDetails(uniqueName: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}${uniqueName}`);
+  getUserDetails(email: string): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}${email}`);
   }
 
  

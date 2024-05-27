@@ -1,21 +1,59 @@
-<h2>Cancel Booking</h2>
 
-<form [formGroup]="cancelForm" (ngSubmit)="openCancel(cancelForm)">
+
+<!-- <form [formGroup]="cancelForm" (ngSubmit)="openCancel(cancelForm)">
   <div class="form-group">
-    <p>Are you sure you want to cancel?</p>
-    <!-- <label for="reason">Reason for cancellation</label>
+    <div class="form-group">
+      <mat-card>
+        <mat-calendar
+          [selected]="selectedDate"
+          (selectedChange)="onSelect($event)"
+        ></mat-calendar>
+      </mat-card>
+    </div>
+    <p>Are you sure you want to cancel?</p> -->
+<!-- <label for="reason">Reason for cancellation</label>
     <input id="reason" formControlName="reason" type="text" class="form-control">
     <div *ngIf="cancelForm?.get('reason')?.invalid && cancelForm?.get('reason')?.touched">
       Reason is required.
     </div> -->
-  </div>
+<!-- </div>
 
   <div class="form-actions">
+
+    
     <button mat-button (click)="closeForm()">No</button>
     <button mat-raised-button color="warn" type="submit">
       Yes
     </button>
   </div>
-</form>
+</form> -->
 
 <!-- <button mat-raised-button (click)="openCancel(cancelForm)">Are you want to Cancel Meal?</button> -->
+
+
+
+
+
+<div class="cancel-container">
+  <div class="cancel-form">
+    <div class="cancel-header">
+      <h1 class="mx-auto">Cancel Booking</h1>
+      <!-- <button (click)="closeForm()">&#10006;</button> -->
+    </div>
+    <form [formGroup]="cancelForm">
+      
+
+      <div class="text-center">
+        <div class="pt-3">
+          Are you sure you want to cancel the meal booking for tomorrow {{ selectedDate | date:'longDate' }}?
+        </div>
+        
+        <div class="form-group btn-container">
+          <button mat-button (click)="closeForm()">No</button>
+          <button mat-raised-button color="warn" class="btn btn-xl " (click)="onSubmit()">Yes</button>
+        </div>
+      </div>
+     
+    </form>
+  </div>
+</div>

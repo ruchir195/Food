@@ -78,22 +78,6 @@ ngOnInit(): void
               this.toast.success({detail:"SUCCESS", summary:res.message, duration:5000});
               this.storedMessage = res.message;
               this.changePasswordForm.reset();
-              
-
-
-
-
-              console.log("STMSG: ",this.storedMessage);
-               // Trigger the notification after the storedMessage is set
-               this.notification.notification(this.storedMessage)
-               .subscribe({
-                 next: (notifRes) => {
-                   this.toast.success({ detail: "SUCCESS", summary: "Ruchur parmar", duration: 5000 });
-                 },
-                 error: (notifErr) => {
-                   this.toast.error({ detail: "ERROR", summary: notifErr?.error.message, duration: 5000 });
-                 }
-               });
                this.router.navigate(['login']);
             },
             error:(err) => {
@@ -101,29 +85,6 @@ ngOnInit(): void
               this.toast.error({detail:"ERROR", summary:err?.error.message, duration:5000});
             }
           })
-
-          // ------------notification------------
-          
-          // console.log(this.storedMessage);
-          // this.notification.notification(this.storedMessage)
-          // .subscribe({
-          //   next:(res) => {
-          //     // alert(res.message);
-          //     this.toast.success({detail:"SUCCESS", summary:res.message, duration:5000});
-          //     this.changePasswordForm.reset();
-          //     this.router.navigate(['login']);
-          //   },
-          //   error:(err) => {
-          //     // alert(err?.error.message);
-          //     this.toast.error({detail:"ERROR", summary:err?.error.message, duration:5000});
-          //   }
-          // })
-
-
-
-
-
-
 
         }else{
           this.toast.error({detail:"ERROR", summary:"password and confirm password not match", duration:5000});
@@ -141,7 +102,7 @@ ngOnInit(): void
             if (this.changePasswordForm.controls['opassword'].errors?.['required']) {
               this.toast.warning({ detail: 'ERROR', summary: 'Please enter a old password', duration: 5000 });
             } else if (this.changePasswordForm.controls['opassword'].errors?.['pattern']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address', duration: 5000 });
+              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid Password', duration: 5000 });
             }
           }
           if (this.changePasswordForm.controls['newpassword'].invalid) {

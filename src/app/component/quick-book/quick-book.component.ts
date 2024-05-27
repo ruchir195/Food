@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { NgToastService } from 'ng-angular-popup';
+import { BookingService } from 'src/app/services/booking.service';
 
 
 @Component({
@@ -11,12 +14,23 @@ import { MatDialogRef } from '@angular/material/dialog';
 export class QuickBookComponent {
 quickbookForm!: FormGroup;
 isFormVisible = true;
-minDate: Date;
+// minDate: Date;
 myFilter: (d: Date | null) => boolean;
 
+minDate = new Date(); // Minimum selectable date (starting from today)
+  
+// Function to filter dates (disable past dates and weekends)
+filterPredicate = (date: Date | null): boolean => {
+  const day = (date || new Date()).getDay();
+  return day !== 0 && day !== 6 && (date || new Date()) >= this.minDate;
+};
+
 constructor(
-  private fb: FormBuilder,
-  public dialogRef: MatDialogRef<QuickBookComponent>
+   private fb: FormBuilder,
+    public dialogRef: MatDialogRef<QuickBookComponent>,
+    private booking: BookingService,
+    private toast: NgToastService,
+    private router: Router,
 ) {
   // Set the minimum date to tomorrow
   const today = new Date();
@@ -48,10 +62,28 @@ closeForm() {
   this.dialogRef.close();
 }
 
-bookMeal(): void {
+quickBookMeal(): void {
   if (this.quickbookForm.valid) {
     console.log(this.quickbookForm.value);
-    this.closeForm();
+    this.booking.quickBook(this.quickbookForm.value).subscribe({
+      next:(res=>{    
+        console.log("username: ",res);
+        // alert("Login successfully.")
+        this.quickbookForm.reset();
+       
+        
+        this.toast.success({detail:"SUCCESS", summary:"Quick book Meal successfully.", duration:5000});
+        this.router.navigate(['/dashboard/home']);
+        this.closeForm();
+        
+      }),
+      error:(err=>{
+        console.log("er: ",err.error);
+        // alert(err.error.message);
+        this.toast.error({detail:"ERROR", summary:err.error, duration:5000});
+        this.closeForm();
+      })
+      })
   }
 }
 
@@ -71,6 +103,9 @@ dateValidator(control: FormControl): { [key: string]: boolean } | null {
   }
   return null;
 }
+
+
+
 
 }
 

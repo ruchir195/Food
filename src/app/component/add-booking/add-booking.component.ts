@@ -17,6 +17,8 @@ export class AddBookingComponent implements OnInit {
   minDate: Date;
   myFilter: (d: Date | null) => boolean;
 
+
+
   constructor(
     private fb: FormBuilder,
     public dialogRef: MatDialogRef<AddBookingComponent>,
@@ -75,8 +77,8 @@ export class AddBookingComponent implements OnInit {
         error:(err=>{
           console.log(err);
           // alert(err.error.message);
-          this.toast.error({detail:"ERROR", summary:err.error.message, duration:5000});
-
+          this.toast.error({detail:"ERROR", summary:err.error, duration:5000});
+          this.closeForm();
         })
         })
     }

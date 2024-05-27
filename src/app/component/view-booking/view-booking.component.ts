@@ -14,19 +14,23 @@ import { BookingService } from 'src/app/services/booking.service';
 export class ViewBookingComponent {
   selectedDate: any;
 
+
+
   // Assuming start and end dates
-  // startDate = new Date('2024-05-20T18:30:00.000Z');
-  // endDate = new Date('2024-05-28T18:30:00.000Z');
+  startDate = new Date('2024-05-27T13:00:00.000Z');
+  endDate = new Date('2024-05-30T13:00:00.000Z');
 
-  startDate!: Date;
-  endDate!: Date;
-  datesToHighlight: string[] = [];
+  // startDate!: Date;
+  // endDate!: Date;
+  // datesToHighlight: string[] = [];
+  // startingDate!: Date;
+  // endingDate!: Date;
 
 
-  // datesToHighlight: string[] = this.generateDatesInRange(
-  //   this.startDate,
-  //   this.endDate
-  // );
+  datesToHighlight: string[] = this.generateDatesInRange(
+    this.startDate,
+    this.endDate
+  );
 
   constructor(
     private fb: FormBuilder,
@@ -53,7 +57,10 @@ export class ViewBookingComponent {
           this.endDate = new Date(res[0].bookingEndDate);
           console.log(this.startDate.toISOString());
           console.log(this.endDate.toISOString());
+          // this.startingDate = new Date(this.startDate.toISOString());
+          // this.endingDate = new Date(this.endDate.toISOString());
           this.datesToHighlight = this.generateDatesInRange(this.startDate, this.endDate);
+          console.log("Dates to highlight: ", this.datesToHighlight);
         }
         
       }),
@@ -90,6 +97,7 @@ export class ViewBookingComponent {
             d.getFullYear() === date.getFullYear()
         );
 
+        // console.log("high: ", highlightDate, date);
       return highlightDate ? 'special-date' : '';
     };
   }
@@ -97,11 +105,12 @@ export class ViewBookingComponent {
   // Function to generate dates between start and end date
   generateDatesInRange(startDate: Date, endDate: Date): string[] {
     const dates: string[] = [];
-    let currentDate = new Date(startDate);
+    let currentDate = startDate;
     while (currentDate <= endDate) {
       dates.push(currentDate.toISOString());
       currentDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000); // Add one day
     }
+    console.log("date: ",dates);
     return dates;
   }
 }

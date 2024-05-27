@@ -10,8 +10,13 @@
           <div class="right">
               <div class="notification d-flex">
                 <div class="card-options">
-                  <i class="fa-solid fa-bell" style="color: white;margin-top: 2px;"></i>   
+                  <span class="bell-icon" (click)="openNotifications()">
+                    <i class="fa-solid fa-bell" style="color: white;margin-top: 2px;"></i> 
+                    <span *ngIf="notificationCount > 0" class="notification-count"></span>
+                  </span>   
                 </div>
+
+               
                   
                   <div class="dropdown" style="color: white;font-family: 'Times New Roman', Times, serif;">
                       <a class="btn dropdown-toggle nav-link icon" role="button" id="dropdownMenuLink"

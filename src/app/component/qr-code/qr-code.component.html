@@ -1,21 +1,20 @@
 <div class="py-2 px-3">
+  <div *ngIf="showQRCode">
+    <div *ngIf="showQRCode">
+      <qrcode [width]="200" (qrCodeURL)="onChange($event)" [qrdata]="qrdata" [allowEmptyString]="true" class="px-5">
+      </qrcode>
+    </div>
 
-  <div *ngIf="showQRCode" >
-    <qrcode 
-    [width]="200" 
-    (qrCodeURL)="onChange($event)" 
-    [qrdata]="qrdata" 
-    [allowEmptyString]="true"
-    class="px-5"></qrcode>
+    <!-- Expiration message -->
+    <p *ngIf="!isExpired " class="text-red">Minutes Left: {{ secondsLeft }}</p>
+    <div *ngIf="isExpired" class="alert alert-danger text-center">
+      QR Code has expired
+    </div>
+
+    <!-- <input type="text" [(ngModel)]="qrdata" /> -->
+    <p *ngIf="!isExpired">Coupon Id: {{ qrdata }}</p>
   </div>
 
- <!-- Expiration message -->
-<div *ngIf="isExpired" class="alert alert-danger text-center">
-  QR Code has expired
-</div>
-
-  <!-- <input type="text" [(ngModel)]="qrdata" /> -->
-  <!-- <p>{{ qrdata }}</p> -->
   <div class="d-flex py-2 " *ngIf="showBtn">
     <button (click)="onClick()" class="btn btn-success mx-auto">couponCode Generate</button>
   </div>
