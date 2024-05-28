@@ -10,6 +10,13 @@ body {
   color: white;
 }
 
+::ng-deep.booked-date{
+  background-color: lightgreen;
+  border-radius: 50%;
+  padding: 2px;
+  color: white;
+}
+
 .booking-container {
   width: 500px;
   height: auto;

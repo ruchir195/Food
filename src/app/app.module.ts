@@ -9,7 +9,7 @@ import {MatCard, MatCardModule} from '@angular/material/card';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule, NgxUiLoaderRouterModule } from 'ngx-ui-loader';
 import { NgbModule, NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgToastModule } from 'ng-angular-popup';
 import { SharedModule } from "./shared/shared.module";
 import { DashboardModule } from './modules/dashboard/dashboard.module';
@@ -34,6 +34,7 @@ import { NotificationComponent } from './component/notification/notification.com
 import { NotificationDialogComponent } from './component/notification-dialog/notification-dialog.component';
 // import { MatErrorModule } from '@angular/material/core';
 import {MatIconModule } from '@angular/material/icon';
+import { AuthInterceptor } from './pages/interceptor/auth.interceptor';
 
 
 @NgModule({
@@ -49,7 +50,11 @@ import {MatIconModule } from '@angular/material/icon';
         NotificationComponent,
         NotificationDialogComponent,
     ],
-    providers: [DatePipe],
+    providers: [{
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptor,
+        multi: true,
+    },DatePipe,],
     bootstrap: [AppComponent],
     imports: [
         BrowserModule,

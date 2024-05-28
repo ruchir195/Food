@@ -12,25 +12,16 @@ import { BookingService } from 'src/app/services/booking.service';
   styleUrls: ['./view-booking.component.css'],
 })
 export class ViewBookingComponent {
+
+
   selectedDate: any;
+  public selectedStartDate!: Date | null;
+  bookingsDate: any[] = [];
+  bookedDayCount: number = 0;
+  displayedMonth: number = new Date().getMonth();
+  displayedYear: number = new Date().getFullYear();
 
-
-
-  // Assuming start and end dates
-  startDate = new Date('2024-05-27T13:00:00.000Z');
-  endDate = new Date('2024-05-30T13:00:00.000Z');
-
-  // startDate!: Date;
-  // endDate!: Date;
-  // datesToHighlight: string[] = [];
-  // startingDate!: Date;
-  // endingDate!: Date;
-
-
-  datesToHighlight: string[] = this.generateDatesInRange(
-    this.startDate,
-    this.endDate
-  );
+  
 
   constructor(
     private fb: FormBuilder,
@@ -40,12 +31,42 @@ export class ViewBookingComponent {
     private router: Router
   ) {}
 
+  bookings: any = {};
   closeForm() {
     this.dialogRef.close();
   }
 
   ngOnInit() {
+    this.selectedStartDate = new Date();
+    this.refreshCalendar();
     this.fetchBookings();
+    
+  }
+
+
+  dateClassV2() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      const day = date.getDay();
+      const isSaturday = day === 6;
+      const isSunday = day === 0;
+  
+      if (isSaturday || isSunday) {
+        return 'weekend-date';
+      }
+  
+      const dateString = date.toISOString().split('T')[0];
+      const isBooked = this.bookingsDate.some(booking => {
+        const startDate = new Date(booking.bookingStartDate).toISOString().split('T')[0];
+        const endDate = new Date(booking.bookingEndDate).toISOString().split('T')[0];
+        return dateString >= startDate && dateString <= endDate;
+      });
+
+
+      if (isBooked) {
+        this.bookedDayCount++;
+      }
+      return isBooked ? 'booked-date' : '';   
+    };
   }
 
   fetchBookings(): void {
@@ -53,14 +74,18 @@ export class ViewBookingComponent {
       next:(res=>{    
         console.log("Dates ",res);
         if (res.length > 0) {
-          this.startDate = new Date(res[0].bookingStartDate);
-          this.endDate = new Date(res[0].bookingEndDate);
-          console.log(this.startDate.toISOString());
-          console.log(this.endDate.toISOString());
-          // this.startingDate = new Date(this.startDate.toISOString());
-          // this.endingDate = new Date(this.endDate.toISOString());
-          this.datesToHighlight = this.generateDatesInRange(this.startDate, this.endDate);
-          console.log("Dates to highlight: ", this.datesToHighlight);
+          this.bookingsDate = res;
+          console.log(this.bookingsDate);
+          this.refreshCalendar();
+          this.updateBookedDayCount();
+          // this.startDate = new Date(res[0].bookingStartDate);
+          // this.endDate = new Date(res[0].bookingEndDate);
+          // console.log(this.startDate.toISOString());
+          // console.log(this.endDate.toISOString());
+          // // this.startingDate = new Date(this.startDate.toISOString());
+          // // this.endingDate = new Date(this.endDate.toISOString());
+          // this.datesToHighlight = this.generateDatesInRange(this.startDate, this.endDate);
+          // console.log("Dates to highlight: ", this.datesToHighlight);
         }
         
       }),
@@ -79,38 +104,36 @@ export class ViewBookingComponent {
   }
 
 
+  updateBookedDayCount() {
+    const startOfMonth = new Date(this.displayedYear, this.displayedMonth, 1);
+    const endOfMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0);
+
+    this.bookedDayCount = this.bookingsDate.filter(booking => {
+      const bookingStartDate = new Date(booking.bookingStartDate);
+      const bookingEndDate = new Date(booking.bookingEndDate);
+
+      // Check if the booking is within the current displayed month
+      return (
+        (bookingStartDate >= startOfMonth && bookingStartDate <= endOfMonth) ||
+        (bookingEndDate >= startOfMonth && bookingEndDate <= endOfMonth) ||
+        (bookingStartDate <= startOfMonth && bookingEndDate >= endOfMonth)
+      );
+    }).length;
+  }
+
+
+  refreshCalendar() {
+    this.selectedStartDate = new Date(this.selectedStartDate!.getTime());
+    this.updateBookedDayCount();
+  }
+
+  onMonthSelected(event: Date) {
+    this.displayedMonth = event.getMonth();
+    this.displayedYear = event.getFullYear();
+    this.updateBookedDayCount();
+  }
+
 
  
 
-  dateClass() {
-    return (date: Date): MatCalendarCellCssClasses => {
-      if (date.getDay() === 0 || date.getDay() === 6) {
-        return '';
-      }
-
-      const highlightDate = this.datesToHighlight
-        .map((strDate) => new Date(strDate))
-        .some(
-          (d) =>
-            d.getDate() === date.getDate() &&
-            d.getMonth() === date.getMonth() &&
-            d.getFullYear() === date.getFullYear()
-        );
-
-        // console.log("high: ", highlightDate, date);
-      return highlightDate ? 'special-date' : '';
-    };
-  }
-
-  // Function to generate dates between start and end date
-  generateDatesInRange(startDate: Date, endDate: Date): string[] {
-    const dates: string[] = [];
-    let currentDate = startDate;
-    while (currentDate <= endDate) {
-      dates.push(currentDate.toISOString());
-      currentDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000); // Add one day
-    }
-    console.log("date: ",dates);
-    return dates;
-  }
 }

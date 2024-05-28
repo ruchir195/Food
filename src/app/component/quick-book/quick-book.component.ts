@@ -38,7 +38,7 @@ constructor(
   this.minDate = new Date(today.setDate(today.getDate() + 1));
 
   this.selectedDate = new Date();
-  this.selectedDate.setDate(this.selectedDate.getDate() + 1); // Add one day
+  this.selectedDate.setDate(this.selectedDate.getDate() + 1); // Add one da y
 
   // Filter function to disable dates before tomorrow and weekends
   this.myFilter = (d: Date | null): boolean => {

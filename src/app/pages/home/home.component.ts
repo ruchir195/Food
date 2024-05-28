@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DateAdapter } from '@angular/material/core';
 import { AuthService } from 'src/app/services/auth.service';
@@ -13,6 +13,8 @@ import { SafeValue } from '@angular/platform-browser';
 import { CoupenService } from 'src/app/services/coupen.service';
 import { QrCodeComponent } from 'src/app/component/qr-code/qr-code.component';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
+import { BookingService } from 'src/app/services/booking.service';
+import { Subscription, interval, startWith, switchMap } from 'rxjs';
 
 
 @Component({
@@ -29,7 +31,8 @@ export class HomeComponent implements OnInit {
   today!: string;
   menu!: { lunch: string[], dinner: string[] };
   day: string = ''; // Initialize day variable
-  // datesToBeHighlighted: string[] = ['2024-05-20', '2024-05-25'];
+  bookingsDate: any[] = [];
+  public selectedStartDate!: Date | null;
 
   isQuickBookingDisabled: boolean = false;
   isCancelBookingDisabled: boolean = false;
@@ -54,18 +57,22 @@ export class HomeComponent implements OnInit {
 
 
   
-  // Example array of dates to highlight
-  startDate = new Date('2024-05-20T18:30:00.000Z');
-  endDate = new Date('2024-05-28T18:30:00.000Z');
+  // // Example array of dates to highlight
+  // startDate = new Date('2024-05-20T18:30:00.000Z');
+  // endDate = new Date('2024-05-28T18:30:00.000Z');
 
-  datesToHighlight: string[] = this.generateDatesInRange(
-    this.startDate,
-    this.endDate
-  );
 
-  constructor(private datePipe: DatePipe,private dateAdapter: DateAdapter<Date> , private auth: AuthService, private userStore: UserStoreService,  private dialogRef : MatDialog, private coupen: CoupenService){}
+  constructor(private datePipe: DatePipe,private dateAdapter: DateAdapter<Date> , private auth: AuthService, private userStore: UserStoreService,  private dialogRef : MatDialog, private coupen: CoupenService, private booking: BookingService){}
+
+  bookings: any = {};
 
   ngOnInit(): void {
+
+    this.selectedStartDate = new Date();
+    this.refreshCalendar();
+    this.fetchBookings();
+
+    
 
     this.updateButtonStates();
     setInterval(() => this.updateButtonStates(), 60000); 
@@ -75,7 +82,7 @@ export class HomeComponent implements OnInit {
       this.userStore.getFullNameFromStore()
       .subscribe(val => {
         let fullNameFromToken = this.auth.getFullNameFromToken();
-        this.fullName = val || fullNameFromToken
+        this.fullName = val || fullNameFromToken  
 
         console.log(fullNameFromToken);
       })
@@ -94,11 +101,14 @@ export class HomeComponent implements OnInit {
       this.today = days[dayIndex];
       this.menu = (menuData as any)[this.today];
 
+
+      
   }
 
   logout(){
     this.auth.signOut();
   }
+
 
 
   onGenerateQR() {
@@ -155,34 +165,54 @@ export class HomeComponent implements OnInit {
 
 
 
-  dateClass() {
-    return (date: Date): MatCalendarCellCssClasses => {
-      if (date.getDay() === 0 || date.getDay() === 6) {
-        return '';
-      }
 
-      const highlightDate = this.datesToHighlight
-        .map((strDate) => new Date(strDate))
-        .some(
-          (d) =>
-            d.getDate() === date.getDate() &&
-            d.getMonth() === date.getMonth() &&
-            d.getFullYear() === date.getFullYear()
-        );
+  fetchBookings(): void {
+    this.booking.getBookingsByDate().subscribe({
+      next:(res=>{    
+        console.log("Dates ",res);
+        if (res.length > 0) {
+          this.bookingsDate = res;
+          console.log("Ruchir")
+          // console.log(this.bookingsDate);
+          this.refreshCalendar();
+         
+        }
+        
+      }),
+      error:(err=>{
+        console.log(err);
+        // alert(err.error.message);
+        // this.toast.error({detail:"ERROR", summary:err.error.message, duration:5000});
 
-      return highlightDate ? 'special-date' : '';
-    };
+      })
+    })
   }
 
-  // Function to generate dates between start and end date
-  generateDatesInRange(startDate: Date, endDate: Date): string[] {
-    const dates: string[] = [];
-    let currentDate = startDate;
-    while (currentDate <= endDate) {
-      dates.push(currentDate.toISOString());
-      currentDate = new Date(currentDate.getTime() + 24 * 60 * 60 * 1000); // Add one day
+  refreshCalendar() {
+    if (this.selectedStartDate) {
+      this.selectedStartDate = new Date(this.selectedStartDate.getTime());
     }
-    return dates;
+  }
+ dateClassV2() {
+    return (date: Date): MatCalendarCellCssClasses => {
+      const day = date.getDay();
+      const isSaturday = day === 6;
+      const isSunday = day === 0;
+  
+      if (isSaturday || isSunday) {
+        return 'weekend-date';
+      }
+  
+      const dateString = date.toISOString().split('T')[0];
+      const isBooked = this.bookingsDate.some(booking => {
+        const startDate = new Date(booking.bookingStartDate).toISOString().split('T')[0];
+        const endDate = new Date(booking.bookingEndDate).toISOString().split('T')[0];
+        return dateString >= startDate && dateString <= endDate;
+      });
+
+
+      return isBooked ? 'booked-date' : '';   
+    };
   }
 
 

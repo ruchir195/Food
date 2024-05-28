@@ -36,7 +36,6 @@ export class BookingService {
 
 
 
-
   getBookingsByDate(): Observable<any> {
     const email = localStorage.getItem('email');
     if (!email) {

@@ -35,4 +35,8 @@ export class NotificationService {
   getNotifications(email: string): Observable<any> {
     return this.http.get(`${this.baseUrl}GetNotifications`, { params: { email } });
   }
+
+
+
+  
 }

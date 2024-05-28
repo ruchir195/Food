@@ -6,15 +6,20 @@
     </div>
     <!-- <form [formGroup]="bookingForm"> -->
     <div class="form-group">
-      <label>Total Bookings: 10</label>
+      
       <mat-card>
         <mat-calendar
-          [dateClass]="dateClass()"
+          [dateClass]="dateClassV2()"
           [selected]="selectedDate"
           (selectedChange)="onSelect($event)"
+          [(ngModel)]="selectedStartDate"
+          (monthSelected)="onMonthSelected($event)"
         ></mat-calendar>
       </mat-card>
+
+      <label>Total Bookings: {{ bookedDayCount }}</label>
     </div>
     <!-- </form> -->
   </div>
 </div>
+

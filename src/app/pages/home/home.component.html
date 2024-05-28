@@ -24,8 +24,8 @@
 
       <mat-card class="demo-inline-calendar-card cal">
 
-        <mat-calendar [dateClass]="dateClass()" [(selected)]="selected" class="cal"
-          [dateFilter]="disablePastDatesFilter" (selectedChange)="onDateSelected($event)"></mat-calendar>
+        <mat-calendar [dateClass]="dateClassV2()"  [(selected)]="selected" class="cal"
+          [dateFilter]="disablePastDatesFilter" (selectedChange)="onDateSelected($event)" [(ngModel)]="selectedStartDate"></mat-calendar>
       </mat-card>
     </div>
 

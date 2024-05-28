@@ -29,6 +29,8 @@ export class NotificationDialogComponent implements OnInit {
     timeStamp: string;
   }[] = [];
   notificationCount: number = 0;
+  
+
 
   constructor(
     public dialogRef: MatDialogRef<NotificationDialogComponent>,
@@ -40,13 +42,17 @@ export class NotificationDialogComponent implements OnInit {
   }
 
   markAsRead(index: number): void {
-    this.data.notifications[index].read = true;
+    this.notificationCount--;
+    console.log(this.notificationCount);
+    this.notifications[index].read = true
     this.updateLocalStorage();
     this.dialogClosed.emit();
   }
 
   markAsUnread(index: number): void {
-    this.data.notifications[index].read = false;
+    this.notificationCount++;
+    console.log(this.notificationCount);
+    this.notifications[index].read  = false
     this.updateLocalStorage();
     this.dialogClosed.emit();
   }
@@ -73,6 +79,7 @@ export class NotificationDialogComponent implements OnInit {
           console.log('notification: ', response);
           this.notifications = response.notifications;
           this.notificationCount = this.notifications.length;
+          console.log(this.notificationCount);
           this.cdr.detectChanges(); // Ensure the view is updated
         }
       });

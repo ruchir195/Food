@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NotificationDialogComponent } from 'src/app/component/notification-dialog/notification-dialog.component';
 import { LogoutComponent } from 'src/app/pages/logout/logout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Notification } from 'src/app/models/notification.model';
+import { NotificationService } from 'src/app/services/notification.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +13,9 @@ import { Notification } from 'src/app/models/notification.model';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
-  constructor(private auth: AuthService, private dialogRef: MatDialog,public dialog: MatDialog) { }
+
+
+  constructor(private auth: AuthService, private dialogRef: MatDialog,public dialog: MatDialog, private notification: NotificationService,private cdr: ChangeDetectorRef) { }
 
   uniqueName: string | null = null;
   name: string | null = null;
@@ -41,6 +45,21 @@ export class HeaderComponent implements OnInit {
         this.notificationCount = this.notifications.filter(n => !n.read).length;
       }
 
+
+
+      if(email){
+        this.notification.getNotifications(email).subscribe((response) => {
+          if (response.statusCode === 200) {
+            console.log('notification: ', response);
+            this.notifications = response.notifications;
+            this.notificationCount = this.notifications.length;
+            console.log(this.notificationCount);
+            this.cdr.detectChanges(); // Ensure the view is updated
+          }
+        });
+      }
+     
+
   }  
 
   logout(): void {
@@ -60,6 +79,7 @@ export class HeaderComponent implements OnInit {
 
   
     openNotifications(event: MouseEvent): void {
+      console.log("this : ",this.notifications);
       event.stopPropagation();
       const dialogRef = this.dialog.open(NotificationDialogComponent, {
         width: '300px',
