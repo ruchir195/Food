@@ -40,7 +40,7 @@ constructor(
 ngOnInit(): void
 {
   this.loginForm=this.fb.group({
-    username: ['', [Validators.required, Validators.email]],
+    email: ['', [Validators.required, Validators.email]],
     password: ['',[Validators.required,Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]] 
 
   // At least 8 characters long
@@ -58,7 +58,7 @@ onLogin(){
       {
         console.log(this.loginForm.value);
         // alert("Form Login successfully.")
-        localStorage.setItem('email',this.loginForm.value.username);
+        localStorage.setItem('email',this.loginForm.value.email);
         this.auth.login(this.loginForm.value).subscribe({
           next:(res=>{    
             console.log("username: ",res);

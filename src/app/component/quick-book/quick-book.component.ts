@@ -14,6 +14,7 @@ import { BookingService } from 'src/app/services/booking.service';
 export class QuickBookComponent {
 quickbookForm!: FormGroup;
 isFormVisible = true;
+selectedDate: any;
 // minDate: Date;
 myFilter: (d: Date | null) => boolean;
 
@@ -36,6 +37,9 @@ constructor(
   const today = new Date();
   this.minDate = new Date(today.setDate(today.getDate() + 1));
 
+  this.selectedDate = new Date();
+  this.selectedDate.setDate(this.selectedDate.getDate() + 1); // Add one day
+
   // Filter function to disable dates before tomorrow and weekends
   this.myFilter = (d: Date | null): boolean => {
     if (!d) return false;
@@ -54,7 +58,7 @@ ngOnInit(): void {
   this.quickbookForm = this.fb.group({
     category: ['', Validators.required],
     mealType: ['', Validators.required],
-    selectedDate: [null, [Validators.required, this.dateValidator.bind(this)]]
+    selectedDate: this.selectedDate
   });
 }
 

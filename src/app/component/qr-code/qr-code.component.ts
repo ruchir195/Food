@@ -27,7 +27,7 @@ export class QrCodeComponent implements OnDestroy{
   secondsLeft: number = 0; // Change to secondsLeft
 
   expirationInterval: any; // Variable to store the interval
-
+  uniqueId: number | null = null;
 
   onChange(url: SafeValue) {
     // this.qrCodeDownloadeLink = url;
@@ -46,42 +46,50 @@ export class QrCodeComponent implements OnDestroy{
   }
 
   onClick() {
-    this.coupen.addCoupon(this.qrdata).subscribe((res) => {
-      console.log(res);
-      this.qrdata = res.coupon.coupenCode;
-      console.log(this.qrdata);
-      this.userId = res.coupon.userID;
-      console.log(this.userId);
-      this.showQRCode = true;
-      this.showBtn = false;
-      console.log(res.coupon.expirationTime);
-      console.log(res.coupon.createdTime);
+    const uniqueName = this.auth.getUniqueName();
+    if(uniqueName){
+      this.uniqueId = parseInt(uniqueName, 10);
+      console.log(this.uniqueId);
+      this.coupen.addCoupon(this.uniqueId).subscribe((res) => {
+        console.log(res);
+        this.qrdata = res.coupon.coupenCode;
+        console.log(this.qrdata);
+        this.userId = res.coupon.userID;
+        console.log(this.userId);
+        this.showQRCode = true;
+        this.showBtn = false;
+        console.log(res.coupon.expirationTime);
+        console.log(res.coupon.createdTime);
+
+        const currentTime = new Date().getTime();
+        const expirationTime = new Date(res.coupon.expirationTime).getTime();
+        const expirationDuration = expirationTime - currentTime;
+  
+        // Set the expiration timer
+        this.setExpirationTimer(expirationDuration);
+  
+        // Calculate seconds left instead of minutes
+        this.secondsLeft = Math.ceil(expirationDuration / 1000);
+  
+        this.expirationInterval = setInterval(() => {
+          this.secondsLeft--;
+          if (this.secondsLeft <= 0) {
+            clearInterval(this.expirationInterval);
+            this.isExpired = true;
+            this.dialogRef.close();
+            this.toast.error({ detail: "ERROR", summary: 'QR Code has expired', duration: 5000 });
+          }
+        }, 1000); // Update every second
+  
+      });
+    }
+   
 
 
-      const currentTime = new Date().getTime();
-      const expirationTime = new Date(res.coupon.expirationTime).getTime();
-      const expirationDuration = expirationTime - currentTime;
-
-      // Set the expiration timer
-      this.setExpirationTimer(expirationDuration);
-
-      // Calculate seconds left instead of minutes
-      this.secondsLeft = Math.ceil(expirationDuration / 1000);
-
-      this.expirationInterval = setInterval(() => {
-        this.secondsLeft--;
-        if (this.secondsLeft <= 0) {
-          clearInterval(this.expirationInterval);
-          this.isExpired = true;
-          this.dialogRef.close();
-          this.toast.error({ detail: "ERROR", summary: 'QR Code has expired', duration: 5000 });
-        }
-      }, 1000); // Update every second
-
-    });    
+         
   }
 
-
+ 
   
 
   setExpirationTimer(duration: number) {

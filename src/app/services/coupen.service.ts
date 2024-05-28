@@ -15,16 +15,16 @@ export class CoupenService {
 
 
 
-  addCoupon(coupObj: any): Observable<any> {
-    const email = localStorage.getItem("email");
-    console.log(email);
-    var coupenObject = {
-      coupObj: coupObj,
-      email: email
-    }
-    console.log("coupenObject: ",coupenObject);
+  addCoupon(userID: any): Observable<any> {
+    // const email = localStorage.getItem("email");
+    // console.log(email);
+    // var coupenObject = {
+    //   coupObj: coupObj,
+    //   email: email
+    // }
+    console.log("coupenObject: ",userID);
     
-    return this.http.post<any>(`${this.coupenUrl}AddData`, coupenObject);
+    return this.http.post<any>(`${this.coupenUrl}AddData`, userID);
   }
 
   getCoupon(id: number): Observable<any> {

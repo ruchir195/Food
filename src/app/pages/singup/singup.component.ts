@@ -47,9 +47,8 @@ export class SingupComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
-      username: ['', Validators.required],
-      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]]
-      // cpassword:['',Validators.required],
+      password: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]],
+      cpassword: ['', [Validators.required, Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/)]],
 
     })
   }
@@ -58,7 +57,8 @@ export class SingupComponent implements OnInit {
   onSubmit() {
     if (this.signupForm.valid) {
       console.log(this.signupForm.value);
-      this.auth.signUp(this.signupForm.value)
+      if(this.signupForm.value.password === this.signupForm.value.cpassword){
+        this.auth.signUp(this.signupForm.value)
         .subscribe({
           next: (res) => {
             // alert("Signup successfully");
@@ -72,6 +72,10 @@ export class SingupComponent implements OnInit {
             this.toast.error({ detail: "ERROR", summary: err.error.message, duration: 5000 });
           }
         })
+      }else{
+        this.toast.error({ detail: 'ERROR', summary: 'Password and confirm password not match', duration: 5000 });
+      }
+     
 
     }
     else {
@@ -92,13 +96,18 @@ export class SingupComponent implements OnInit {
             this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address', duration: 5000 });
           }
         }
-        if (this.signupForm.controls['username'].invalid) {
-          this.toast.warning({ detail: 'ERROR', summary: 'Please enter a username', duration: 5000 });
-        }
+       
         if (this.signupForm.controls['password'].invalid) {
           if (this.signupForm.controls['password'].errors?.['required']) {
             this.toast.warning({ detail: 'ERROR', summary: 'Please enter a password', duration: 5000 });
           } else if (this.signupForm.controls['password'].errors?.['pattern']) {
+            this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
+          }
+        }
+        if (this.signupForm.controls['cpassword'].invalid) {
+          if (this.signupForm.controls['cpassword'].errors?.['required']) {
+            this.toast.warning({ detail: 'ERROR', summary: 'Please enter a password', duration: 5000 });
+          } else if (this.signupForm.controls['cpassword'].errors?.['pattern']) {
             this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
           }
         }

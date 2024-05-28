@@ -91,14 +91,6 @@ changePassword(changePasswordObj:any ){
   }
 
 
-  // decodedToken(){
-  //   const jwtHelper = new JwtHelperService();
-  //   const token = this.getToken()!;
-  //   console.log("jwt: ",jwtHelper.decodeToken(token));
-  //   this.unique_name = jwtHelper.decodeToken(token).unique_name;
-  //   return jwtHelper.decodeToken(token);
-  // }
-
 
   decodedToken() {
     const token = this.getToken();
