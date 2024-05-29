@@ -91,8 +91,7 @@ export class QrCodeComponent implements OnDestroy {
           }
         }, 1000); // Update every second
       });
-    }
-    this.disableButtonForOneMinute();
+    }    
   }
 
   setExpirationTimer(duration: number) {
@@ -112,20 +111,5 @@ export class QrCodeComponent implements OnDestroy {
         duration: 5000,
       });
     }, duration);
-  }
-  disableButtonForOneMinute() {
-    this.isButtonDisabled = true;
-    this.remainingTime = 180;
-
-    this.timer = setTimeout(() => {
-      this.remainingTime--;
-      if (this.remainingTime <= 0) {
-        this.enableButton();
-      }
-    }, 1000);
-  }
-  enableButton() {
-    this.isButtonDisabled = false;
-    clearInterval(this.timer);
   }
 }

@@ -34,6 +34,7 @@ export class HomeComponent implements OnInit {
   isQuickBookingDisabled: boolean = false;
   isCancelBookingDisabled: boolean = false;
   isMealBookingDisabled: boolean = false;
+  isGenerateQRDisabled: boolean = false;
 
   qrCodeDownloadeLink = '';
   SafeValue = '';
@@ -106,8 +107,15 @@ export class HomeComponent implements OnInit {
 
   onGenerateQR() {
     const dialogRef = this.dialogRef.open(QrCodeComponent, {
-      disableClose: true, // Prevent dialog from closing on outside click
+      disableClose: true, // Prevent dialog from closing on outside click 
     });
+    this.isGenerateQRDisabled = true;
+
+  // Re-enable the button after 2 minutes (120000 milliseconds)
+  setTimeout(() => {
+    this.isGenerateQRDisabled = false;
+  }, 120000);
+    
   }
 
   updateButtonStates() {
