@@ -5,7 +5,7 @@ import { LogoutComponent } from 'src/app/pages/logout/logout.component';
 import { AuthService } from 'src/app/services/auth.service';
 import { Notification } from 'src/app/models/notification.model';
 import { NotificationService } from 'src/app/services/notification.service';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, interval, switchMap } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -25,6 +25,9 @@ export class HeaderComponent implements OnInit {
     this.uniqueName = this.auth.getUniqueName();
     console.log('Unique Name: ', this.uniqueName);
 
+ 
+
+
     let email = localStorage.getItem("email");
 
     if (email) {
@@ -42,7 +45,8 @@ export class HeaderComponent implements OnInit {
     const savedNotifications = localStorage.getItem('notifications');
       if (savedNotifications) {
         this.notifications = JSON.parse(savedNotifications);
-        this.notificationCount = this.notifications.filter(n => !n.read).length;
+        this.updateNotificationCount();
+        // this.notificationCount = this.notifications.filter(n => !n.read).length;
       }
 
 
@@ -52,7 +56,8 @@ export class HeaderComponent implements OnInit {
           if (response.statusCode === 200) {
             console.log('notification: ', response);
             this.notifications = response.notifications;
-            this.notificationCount = this.notifications.length;
+            this.updateNotificationCount();
+            // this.notificationCount = this.notifications.length;
             console.log(this.notificationCount);
             this.cdr.detectChanges(); // Ensure the view is updated
           }
@@ -77,12 +82,17 @@ export class HeaderComponent implements OnInit {
     notifications: Notification[] = [];  
     notificationCount: number = 0;
 
-  
+    updateNotificationCount(): void {
+      this.notificationCount = this.notifications.filter(n => !n.read).length;
+    }
+
+
+
     openNotifications(event: MouseEvent): void {
       console.log("this : ",this.notifications);
       event.stopPropagation();
       const dialogRef = this.dialog.open(NotificationDialogComponent, {
-        width: '300px',
+        width: '500px',
         data: { notifications: this.notifications }
       });
   
@@ -100,7 +110,6 @@ export class HeaderComponent implements OnInit {
         localStorage.setItem('notifications', JSON.stringify(this.notifications));
       });
     }
-
 
 
 

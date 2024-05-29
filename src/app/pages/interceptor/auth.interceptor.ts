@@ -34,7 +34,7 @@ export class AuthInterceptor implements HttpInterceptor {
             return this.handleUnAuthorizedError(request, next);
           }
         }
-        return throwError(()=> new Error("Some other error occured"));
+        return throwError(()=> {this.toast.error({detail:"ERROR", summary:err.error});});
     })
     )
   }
@@ -55,7 +55,8 @@ export class AuthInterceptor implements HttpInterceptor {
       }),
       catchError((err)=>{
         return throwError(()=>{
-          this.toast.warning({detail:"warning", summary:"Token is expired, Please Login again"});
+          console.log("Ruchir : ",err)
+          this.toast.warning({detail:"warning", summary:err.error});
         })
       })
     )

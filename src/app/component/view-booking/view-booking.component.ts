@@ -61,7 +61,6 @@ export class ViewBookingComponent {
         return dateString >= startDate && dateString <= endDate;
       });
 
-
       if (isBooked) {
         this.bookedDayCount++;
       }
@@ -77,16 +76,10 @@ export class ViewBookingComponent {
           this.bookingsDate = res;
           console.log(this.bookingsDate);
           this.refreshCalendar();
-          this.updateBookedDayCount();
-          // this.startDate = new Date(res[0].bookingStartDate);
-          // this.endDate = new Date(res[0].bookingEndDate);
-          // console.log(this.startDate.toISOString());
-          // console.log(this.endDate.toISOString());
-          // // this.startingDate = new Date(this.startDate.toISOString());
-          // // this.endingDate = new Date(this.endDate.toISOString());
-          // this.datesToHighlight = this.generateDatesInRange(this.startDate, this.endDate);
-          // console.log("Dates to highlight: ", this.datesToHighlight);
+          this.countBookedDaysInDisplayedMonth(); // Call to count booked days in the displayed month
         }
+
+
         
       }),
       error:(err=>{
@@ -104,33 +97,41 @@ export class ViewBookingComponent {
   }
 
 
-  updateBookedDayCount() {
-    const startOfMonth = new Date(this.displayedYear, this.displayedMonth, 1);
-    const endOfMonth = new Date(this.displayedYear, this.displayedMonth + 1, 0);
+  countBookedDaysInDisplayedMonth(): void {
+    const currentMonth = this.displayedMonth;
+    const currentYear = this.displayedYear;
 
-    this.bookedDayCount = this.bookingsDate.filter(booking => {
-      const bookingStartDate = new Date(booking.bookingStartDate);
-      const bookingEndDate = new Date(booking.bookingEndDate);
+    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
+    let bookedDays = new Set<string>();
 
-      // Check if the booking is within the current displayed month
-      return (
-        (bookingStartDate >= startOfMonth && bookingStartDate <= endOfMonth) ||
-        (bookingEndDate >= startOfMonth && bookingEndDate <= endOfMonth) ||
-        (bookingStartDate <= startOfMonth && bookingEndDate >= endOfMonth)
-      );
-    }).length;
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(currentYear, currentMonth, day);
+      const dateString = date.toISOString().split('T')[0];
+
+      this.bookingsDate.forEach(booking => {
+        const startDate = new Date(booking.bookingStartDate).toISOString().split('T')[0];
+        const endDate = new Date(booking.bookingEndDate).toISOString().split('T')[0];
+        if (dateString >= startDate && dateString <= endDate) {
+          bookedDays.add(dateString);
+        }
+      });
+    }
+
+    this.bookedDayCount = bookedDays.size;
+    console.log(`Number of booked days in the displayed month: ${this.bookedDayCount}`);
   }
 
+
+   // Assuming you have a method to handle the month change
+   onMonthSelected(month: number, year: number): void {
+    this.displayedMonth = month;
+    this.displayedYear = year;
+    this.countBookedDaysInDisplayedMonth();
+  }
 
   refreshCalendar() {
     this.selectedStartDate = new Date(this.selectedStartDate!.getTime());
-    this.updateBookedDayCount();
-  }
-
-  onMonthSelected(event: Date) {
-    this.displayedMonth = event.getMonth();
-    this.displayedYear = event.getFullYear();
-    this.updateBookedDayCount();
+    this.countBookedDaysInDisplayedMonth(); // Update count when the calendar is refreshed
   }
 
 

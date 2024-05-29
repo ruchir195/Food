@@ -56,29 +56,32 @@
 
 
 
-
-<h1 mat-dialog-title>Notifications</h1>
-<div mat-dialog-content>
-  <ul>
-    <li *ngFor="let notification of notifications; let i = index">
-      <div class="notification-item d-flex justify-content-between align-items-center">
-        <p [ngClass]="{ unread: !notification.read }">
-          {{ notification.message }} - {{ notification.timeStamp | date: 'mediumDate' }}
-        </p>
-        <div>
-          <button mat-icon-button (click)="markAsRead(i)" *ngIf="!notification.read">
-            <mat-icon>done</mat-icon>
-          </button>
-          <button mat-icon-button (click)="markAsUnread(i)" *ngIf="notification.read">
-            <mat-icon>undo</mat-icon>
-          </button>
+<div class="px-2">
+  <h1 mat-dialog-title>Notifications</h1>
+  <div mat-dialog-content>
+    <ul>
+      <li *ngFor="let notification of notifications; let i = index">
+        <div class="notification-item d-flex justify-content-between align-items-center">
+          <p [ngClass]="{ unread: !notification.read }">
+            {{ notification.message }} - {{ notification.timeStamp | date: 'mediumDate' }}
+          </p>
+          <div>
+            <button mat-icon-button (click)="markAsRead(i)" *ngIf="!notification.read">
+              <mat-icon>done</mat-icon>
+            </button>
+            <button mat-icon-button (click)="markAsUnread(i)" *ngIf="notification.read">
+              <mat-icon>undo</mat-icon>
+            </button>
+          </div>
         </div>
-      </div>
-      <mat-divider *ngIf="i < notifications.length - 1"></mat-divider>
-    </li>
-  </ul>
+        <mat-divider *ngIf="i < notifications.length - 1"></mat-divider>
+      </li>
+    </ul>
+  </div>
 </div>
-<div mat-dialog-actions>
+
+
+<!-- <div mat-dialog-actions>
   <button mat-button (click)="clearNotifications()">Mark All As Read</button>
-</div>
+</div> -->
 

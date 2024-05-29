@@ -171,10 +171,12 @@ export class HomeComponent implements OnInit {
       next:(res=>{    
         console.log("Dates ",res);
         if (res.length > 0) {
+          
           this.bookingsDate = res;
+          this.refreshCalendar();
           console.log("Ruchir")
           // console.log(this.bookingsDate);
-          this.refreshCalendar();
+          
          
         }
         
