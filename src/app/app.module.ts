@@ -30,7 +30,6 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LogoutComponent } from './pages/logout/logout.component';
 import { HomeComponent } from './pages/home/home.component';
-import { NotificationComponent } from './component/notification/notification.component';
 import { NotificationDialogComponent } from './component/notification-dialog/notification-dialog.component';
 // import { MatErrorModule } from '@angular/material/core';
 import {MatIconModule } from '@angular/material/icon';
@@ -46,8 +45,7 @@ import { AuthInterceptor } from './pages/interceptor/auth.interceptor';
         QuickBookComponent,
         CancelBookingComponent,
         LogoutComponent,
-        HomeComponent,
-        NotificationComponent,
+        HomeComponent,        
         NotificationDialogComponent,
     ],
     providers: [{
@@ -75,9 +73,9 @@ import { AuthInterceptor } from './pages/interceptor/auth.interceptor';
         SharedModule,
         DashboardModule,
         MatListModule,
-    MatNativeDateModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
+        MatNativeDateModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
         QRCodeModule,
         MatDialogModule,
         MatRadioModule, 

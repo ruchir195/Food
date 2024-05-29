@@ -1,23 +1,21 @@
 import { Component, OnDestroy } from '@angular/core';
 import { SafeValue } from '@angular/platform-browser';
 import { AuthService } from '../../services/auth.service';
-import {CoupenService} from '../../services/coupen.service'
+import { CoupenService } from '../../services/coupen.service';
 import { NgToastService } from 'ng-angular-popup';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-qr-code',
   templateUrl: './qr-code.component.html',
-  styleUrls: ['./qr-code.component.css']
+  styleUrls: ['./qr-code.component.css'],
 })
-export class QrCodeComponent implements OnDestroy{
+export class QrCodeComponent implements OnDestroy {
   qrCodeDownloadeLink = '';
-  
   SafeValue = '';
   public qrdata: string = '';
-  // coupenCode = "";
-  public coupObj= {
-    coupenCode:""
+  public coupObj = {
+    coupenCode: '',
   };
   public userId: any;
   showQRCode: boolean = false;
@@ -29,6 +27,10 @@ export class QrCodeComponent implements OnDestroy{
   expirationInterval: any; // Variable to store the interval
   uniqueId: number | null = null;
 
+  isButtonDisabled: boolean = false;
+  remainingTime: number = 0;
+  private timer: any;
+
   onChange(url: SafeValue) {
     // this.qrCodeDownloadeLink = url;
   }
@@ -37,8 +39,12 @@ export class QrCodeComponent implements OnDestroy{
     // Initialization logic if needed
   }
 
-  constructor(private auth: AuthService, private coupen: CoupenService, private toast: NgToastService, public dialogRef: MatDialogRef<QrCodeComponent>,) {}
-
+  constructor(
+    private auth: AuthService,
+    private coupen: CoupenService,
+    private toast: NgToastService,
+    public dialogRef: MatDialogRef<QrCodeComponent>
+  ) {}
 
   ngOnDestroy() {
     // Clear the expiration interval when the component is destroyed
@@ -47,7 +53,7 @@ export class QrCodeComponent implements OnDestroy{
 
   onClick() {
     const uniqueName = this.auth.getUniqueName();
-    if(uniqueName){
+    if (uniqueName) {
       this.uniqueId = parseInt(uniqueName, 10);
       console.log(this.uniqueId);
       this.coupen.addCoupon(this.uniqueId).subscribe((res) => {
@@ -64,33 +70,30 @@ export class QrCodeComponent implements OnDestroy{
         const currentTime = new Date().getTime();
         const expirationTime = new Date(res.coupon.expirationTime).getTime();
         const expirationDuration = expirationTime - currentTime;
-  
+
         // Set the expiration timer
         this.setExpirationTimer(expirationDuration);
-  
+
         // Calculate seconds left instead of minutes
         this.secondsLeft = Math.ceil(expirationDuration / 1000);
-  
+
         this.expirationInterval = setInterval(() => {
           this.secondsLeft--;
           if (this.secondsLeft <= 0) {
             clearInterval(this.expirationInterval);
             this.isExpired = true;
             this.dialogRef.close();
-            this.toast.error({ detail: "ERROR", summary: 'QR Code has expired', duration: 5000 });
+            this.toast.error({
+              detail: 'ERROR',
+              summary: 'QR Code has expired',
+              duration: 5000,
+            });
           }
         }, 1000); // Update every second
-  
       });
     }
-   
-
-
-         
+    this.disableButtonForOneMinute();
   }
-
- 
-  
 
   setExpirationTimer(duration: number) {
     // Clear any existing timer
@@ -103,7 +106,26 @@ export class QrCodeComponent implements OnDestroy{
       this.showQRCode = false; // Hide the QR code
       this.isExpired = true; // Show the expiration message
       // alert('QR Code has expired');
-      this.toast.error({detail:"ERROR", summary:'QR Code has expired', duration:5000});
+      this.toast.error({
+        detail: 'ERROR',
+        summary: 'QR Code has expired',
+        duration: 5000,
+      });
     }, duration);
+  }
+  disableButtonForOneMinute() {
+    this.isButtonDisabled = true;
+    this.remainingTime = 180;
+
+    this.timer = setTimeout(() => {
+      this.remainingTime--;
+      if (this.remainingTime <= 0) {
+        this.enableButton();
+      }
+    }, 1000);
+  }
+  enableButton() {
+    this.isButtonDisabled = false;
+    clearInterval(this.timer);
   }
 }

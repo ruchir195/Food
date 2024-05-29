@@ -16,11 +16,8 @@
   </div>
 
   <div class="d-flex py-2 " *ngIf="showBtn">
-    <button (click)="onClick()" class="btn btn-success mx-auto">couponCode Generate</button>
+    <button (click)="onClick()" [disabled]="isButtonDisabled" class="btn btn-success mx-auto">couponCode Generate</button>
+    <p *ngIf="isButtonDisabled">Button will be enabled in {{ remainingTime }} seconds</p>    
   </div>
 </div>
 
-
-
-
-<!-- <button (click)="getQr()">Show QR</button> -->

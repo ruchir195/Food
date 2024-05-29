@@ -31,19 +31,28 @@
 
 .menu {
   width: 100%;
-  margin-top: 8%;
+  margin-top: 8%;  
 }
-
+.photo
+{
+  background-image: url("../../../assets/Images/food-security02-20140227.jpg");
+  opacity: 0.8;
+  width: 500px;
+  color: white;  
+  margin: 0 auto;  
+}
 .bgMenu {
   background-color: rgb(89, 89, 151);
   width: 500px;
-  color: white;
+  color: white;  
   margin: 0 auto;
+  opacity: 0.8;  
 }
 
 .lunch ul {
   width: 200px;
-  margin: 0 auto; }
+  margin: 0 auto; 
+ }
 
 .dinner {
   padding-left: 50px;

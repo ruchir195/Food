@@ -7,25 +7,38 @@ import { Component } from '@angular/core';
 })
 export class SideNavComponent {
   
-  openMenuFunction(){
-   
-    var open_menu_element = document.getElementsByClassName('open-menu')[0];
-    open_menu_element.classList.add("hide");
-    var body_element = document.getElementsByClassName('body')[0];
-    body_element.classList.toggle("offcanvas-active");
-    var close_menu_element = document.getElementsByClassName('close-menu')[0];
-    close_menu_element.classList.remove("hide");
-
+  openMenuFunction(): void {
+    const openMenuElement = document.getElementsByClassName('open-menu')[0] as HTMLElement;
+    if (openMenuElement) {
+      openMenuElement.classList.add("hide");
+    }
+  
+    const bodyElement = document.getElementsByClassName('body')[0] as HTMLElement;
+    if (bodyElement) {
+      bodyElement.classList.toggle("offcanvas-active");
+    }
+  
+    const closeMenuElement = document.getElementsByClassName('close-menu')[0] as HTMLElement;
+    if (closeMenuElement) {
+      closeMenuElement.classList.remove("hide");
+    }
   }
-
-  closeMenuFunction(){
-    
-    var open_menu_element = document.getElementsByClassName('open-menu')[0];
-    open_menu_element.classList.remove("hide");
-    var body_element = document.getElementsByClassName('body')[0];
-    body_element.classList.toggle("offcanvas-active");
-    var close_menu_element = document.getElementsByClassName('close-menu')[0];
-    close_menu_element.classList.add("hide");
-    
+  
+  closeMenuFunction(): void {
+    const openMenuElement = document.getElementsByClassName('open-menu')[0] as HTMLElement;
+    if (openMenuElement) {
+      openMenuElement.classList.remove("hide");
+    }
+  
+    const bodyElement = document.getElementsByClassName('body')[0] as HTMLElement;
+    if (bodyElement) {
+      bodyElement.classList.toggle("offcanvas-active");
+    }
+  
+    const closeMenuElement = document.getElementsByClassName('close-menu')[0] as HTMLElement;
+    if (closeMenuElement) {
+      closeMenuElement.classList.add("hide");
+    }
   }
+  
 }
