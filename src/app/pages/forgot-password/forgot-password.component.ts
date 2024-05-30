@@ -48,7 +48,7 @@ export class ForgotPasswordComponent{
             },
             error:(err) => {
               // alert(err?.error.message);
-              this.toast.error({detail:"ERROR", summary:err?.error.message, duration:5000});
+              this.toast.error({detail:"ERROR", summary:"Email does not exists", duration:5000});
             }
           })
             

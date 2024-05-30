@@ -33,8 +33,25 @@ export class AuthInterceptor implements HttpInterceptor {
             // this.router.navigate(['login'])
             return this.handleUnAuthorizedError(request, next);
           }
+
+          if (err.error) {
+            let errorMessage = '';
+            if (err.error.message) {
+              errorMessage = err.error.message;
+            } else if (err.error.error) {
+              errorMessage = err.error.error;
+            } else {
+              errorMessage = 'Unknown error occurred';
+            }
+            return throwError(() => {
+              this.toast.error({ detail: 'ERROR', summary: errorMessage });
+            });
+          }
         }
-        return throwError(()=> {this.toast.error({detail:"ERROR", summary:err.error});});
+        
+        return throwError(() => {
+          this.toast.error({ detail: 'ERROR', summary: 'Unknown error occurred' });
+        });
     })
     )
   }

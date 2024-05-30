@@ -67,6 +67,7 @@ onSubmit(){
               // alert(res.message);
               this.toast.success({detail:"SUCCESS", summary:res.message, duration:5000});
               this.newpasForm.reset();
+              localStorage.removeItem("otp");
               this.router.navigate(['login']);
             },
             error:(err) => {

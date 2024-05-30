@@ -1,36 +1,46 @@
-
 <div class="d-flex">
-    <div class="calender">
-      <div class="d-flex py-3">
-
-        <div class="px-3">
-          <button (click)="openbooking()" class="py-2 btn btn-danger">
-            View Booking
-          </button>
-        </div>
-        <div class="px-3">
-          <button (click)="openQuickBooking()" class="py-2 btn btn-danger" [disabled]="isQuickBookingDisabled">
-            Quick Booking
-          </button>
-        </div>
-
-        <div class="px-3">
-          <button (click)="cancelBooking()" class="py-2 btn btn-danger" [disabled]="isCancelBookingDisabled">
-            Cancel Booking
-          </button>
-        </div>
-
+  <div class="calender">
+    <div class="d-flex py-3">
+      <div class="px-3">
+        <button (click)="openbooking()" class="py-2 btn btn-danger">
+          View Booking
+        </button>
+      </div>
+      <div class="px-3">
+        <button
+          (click)="openQuickBooking()"
+          class="py-2 btn btn-danger"
+          [disabled]="isQuickBookingDisabled"
+        >
+          Quick Booking
+        </button>
       </div>
 
-      <mat-card class="demo-inline-calendar-card cal">
-
-        <mat-calendar [dateClass]="dateClassV2()"  [(selected)]="selected" class="cal"
-          [dateFilter]="disablePastDatesFilter" (selectedChange)="onDateSelected($event)" [(ngModel)]="selectedStartDate"></mat-calendar>
-      </mat-card>
+      <div class="px-3">
+        <button
+          (click)="cancelBooking()"
+          class="py-2 btn btn-danger"
+          [disabled]="isCancelBookingDisabled"
+        >
+          Cancel Booking
+        </button>
+      </div>
     </div>
 
-    <div class="menu">
-      <div class="photo">
+    <mat-card class="demo-inline-calendar-card cal">
+      <mat-calendar
+        [dateClass]="dateClassV2()"
+        [(selected)]="selected"
+        class="cal"
+        [dateFilter]="disablePastDatesFilter"
+        (selectedChange)="onDateSelected($event)"
+        [(ngModel)]="selectedStartDate"
+      ></mat-calendar>
+    </mat-card>
+  </div>
+
+  <div class="menu">
+    <div class="photo">
       <mat-card class="bgMenu">
         <mat-card-content>
           <mat-list>
@@ -52,26 +62,28 @@
         </mat-card-content>
       </mat-card>
     </div>
-
-    </div>
-
-  </div>
-
-  <div class="calender">
+    <div class="calender">
     <div class="d-flex px-5">
-      <div class="px-5 pt-3 pb-5">
-        <button (click)="openDialog()" class="py-2 btn btn-danger" [disabled]="isMealBookingDisabled">
-          Book a Meal
-        </button>
-      </div>
-
-
-      <div class="  pt-3 pb-5">
-        <button (click)="onGenerateQR()" class="py-2 btn btn-danger" [disabled]="isGenerateQRDisabled">
+      <div class="py-5 d-flex">
+        <button
+          (click)="onGenerateQR()"
+          class="py-2 btn btn-danger"
+          [disabled]="isGenerateQRDisabled"
+        >
           Generate QR code
         </button>
+        <div class="px-5 ">
+          <button
+            (click)="openDialog()"
+            class="py-2 btn btn-danger"
+            [disabled]="isMealBookingDisabled"
+          >
+            Book a Meal
+          </button>
+        </div>
       </div>
     </div>
-
-
   </div>
+</div>
+</div>
+

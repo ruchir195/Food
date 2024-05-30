@@ -74,23 +74,23 @@ onLogin(){
             this.router.navigate(['/dashboard/home']);
             
           }),
-          error:(err=>{
-            console.log(err);
-            // alert(err.error.message);
-            this.toast.error({detail:"ERROR", summary:err.error.message, duration:5000});
-  
+          error: (err => {
+            console.log("Error response from backend:", err);
+            // Handle the error based on its actual structure
+            // Example: console.log(err.error);
           })
-          })
+        })
       }
       else
       {
-        if (this.loginForm.controls['username'].invalid && this.loginForm.controls['password'].invalid) {
+        console.log("Ruchir PArmar")
+        if (this.loginForm.controls['email'].invalid && this.loginForm.controls['password'].invalid) {
           this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address and password', duration: 5000 });
         } else {
-          if (this.loginForm.controls['username'].invalid) {
-            if (this.loginForm.controls['username'].errors?.['required']) {
+          if (this.loginForm.controls['email'].invalid) {
+            if (this.loginForm.controls['email'].errors?.['required']) {
               this.toast.warning({ detail: 'ERROR', summary: 'Please enter an email address', duration: 5000 });
-            } else if (this.loginForm.controls['username'].errors?.['email']) {
+            } else if (this.loginForm.controls['email'].errors?.['email']) {
               this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address', duration: 5000 });
             }
           }
@@ -102,7 +102,6 @@ onLogin(){
             }
           }
         }
-  
         console.log("form is not valid");
         //throw a error using toaster and with  required fileds
         ValidateForm.validateAllFormFields(this.loginForm);
