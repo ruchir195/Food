@@ -1,22 +1,22 @@
 {
   "Monday": {
-    "lunch": ["Dal", "Bhakri", "Kadhi", "Bhat (Rice)", "Dhokla", "Salad"],
-    "dinner": ["Undhiyu", "Puri", "Shrikhand", "Papad"]
+    "lunch": ["Dal", "Bhakri", "Kadhi", "Bhat (Rice)", "Dhokla"],
+    "dinner": ["Undhiyu", "Puri", "Shrikhand", "Papad", "Salad"]
   },
   "Tuesday": {
     "lunch": ["Thepla", "Batata Nu Shaak", "Methi Thepla", "Kachumber", "Buttermilk"],
-    "dinner": ["Sev Tameta", "Bajra Rotla", "Gulab Jamun", "Chaas"]
+    "dinner": ["Sev Tameta", "Bajra Rotla", "Gulab Jamun", "Chaas", "Papad"]
   },
   "Wednesday": {
-    "lunch": ["Khichdi", "Kadhi", "Farsan (Khandvi)", "Salad"],
-    "dinner": ["Gujarati Dal", "Bhindi Masala", "Roti", "Basundi"]
+    "lunch": ["Khichdi", "Kadhi", "Farsan (Khandvi)", "Salad", "Pickle"],
+    "dinner": ["Gujarati Dal", "Bhindi Masala", "Roti", "Basundi", "Papad"]
   },
   "Thursday": {
-    "lunch": ["Handvo", "Green Chutney", "Cucumber Salad"],
-    "dinner": ["Paneer Tikka Masala", "Jeera Rice", "Roti", "Chaas"]
+    "lunch": ["Handvo", "Green Chutney", "Cucumber Salad", "Chaas", "Pickle"],
+    "dinner": ["Paneer Tikka", "Jeera Rice", "Roti", "Chaas", "Papad"]
   },
   "Friday": {
-    "lunch": ["Patra", "Kadhi", "Rice", "Salad"],
-    "dinner": ["Ringan no Olo (Baingan Bharta)", "Bajra Rotla", "Jalebi", "Buttermilk"]
+    "lunch": ["Patra", "Kadhi", "Rice", "Salad", "Pickle"],
+    "dinner": ["Ringan no Odo", "Bajra Rotla", "Jalebi", "Buttermilk", "Papad"]
   }
 }

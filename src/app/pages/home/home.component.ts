@@ -39,7 +39,6 @@ export class HomeComponent implements OnInit {
   qrCodeDownloadeLink = '';
   SafeValue = '';
   public qrdata: string = '';
-  // coupenCode = "";
   public coupObj = {
     coupenCode: '',
   };
@@ -48,10 +47,6 @@ export class HomeComponent implements OnInit {
   onChange(url: SafeValue) {
     // this.qrCodeDownloadeLink = url;
   }
-
-  // // Example array of dates to highlight
-  // startDate = new Date('2024-05-20T18:30:00.000Z');
-  // endDate = new Date('2024-05-28T18:30:00.000Z');
 
   constructor(
     private datePipe: DatePipe,
@@ -76,8 +71,6 @@ export class HomeComponent implements OnInit {
     this.userStore.getFullNameFromStore().subscribe((val) => {
       let fullNameFromToken = this.auth.getFullNameFromToken();
       this.fullName = val || fullNameFromToken;
-
-      console.log(fullNameFromToken);
     });
 
     this.userStore.getRoleFromStore().subscribe((val) => {
@@ -87,7 +80,7 @@ export class HomeComponent implements OnInit {
 
     this.selected = new Date();
 
-    const dayIndex = new Date().getDay(); // 0 for Sunday, 1 for Monday, ..., 6 for Saturday
+    const dayIndex = new Date().getDay();
     const days = [
       'Sunday',
       'Monday',
@@ -99,6 +92,9 @@ export class HomeComponent implements OnInit {
     ];
     this.today = days[dayIndex];
     this.menu = (menuData as any)[this.today];
+
+    // Ensure button states are updated on initialization
+    this.checkBookingsForSelectedDate();
   }
 
   logout() {
@@ -107,37 +103,46 @@ export class HomeComponent implements OnInit {
 
   onGenerateQR() {
     const dialogRef = this.dialogRef.open(QrCodeComponent, {
-      disableClose: true, // Prevent dialog from closing on outside click 
+      disableClose: true, // Prevent dialog from closing on outside click
     });
     this.isGenerateQRDisabled = true;
 
-  // Re-enable the button after 2 minutes (120000 milliseconds)
-  setTimeout(() => {
-    this.isGenerateQRDisabled = false;
-  }, 120000);
-    
+    // Re-enable the button after 2 minutes (120000 milliseconds)
+    setTimeout(() => {
+      this.isGenerateQRDisabled = false;
+    }, 120000);
   }
 
   updateButtonStates() {
-    const now = new Date();
-    const hours = now.getHours();
+    this.checkBookingsForSelectedDate();
+  }
 
-    // if ((hours >= 9 && hours < 12) || (hours >= 17 && hours < 21)) {
-    //   this.isQuickBookingDisabled = true;
-    //   this.isCancelBookingDisabled = true;
-    //   this.isMealBookingDisabled = true;
-    // } else {
-    //   this.isQuickBookingDisabled = false;
-    //   this.isCancelBookingDisabled = false;
-    //   this.isMealBookingDisabled = false;
-    // }
+  checkBookingsForSelectedDate() {
+    if (!this.selectedStartDate) {
+      this.isCancelBookingDisabled = true;
+      this.isGenerateQRDisabled = true;
+      return;
+    }
+
+    const selectedDateString = this.selectedStartDate
+      .toISOString()
+      .split('T')[0];
+    const hasBooking = this.bookingsDate.some((booking) => {
+      const startDate = new Date(booking.bookingStartDate)
+        .toISOString()
+        .split('T')[0];
+      const endDate = new Date(booking.bookingEndDate)
+        .toISOString()
+        .split('T')[0];
+      return selectedDateString >= startDate && selectedDateString <= endDate;
+    });
+
+    this.isCancelBookingDisabled = !hasBooking;
+    this.isGenerateQRDisabled = !hasBooking;
   }
 
   onDateSelected(date: Date | null): void {
-    // Update selected when a date is selected
-    this.selected = date || new Date(); // If date is null, set it to today's date
-
-    // Format the selected date to get the day name (e.g., "Monday")
+    this.selected = date || new Date();
     const dayIndex = this.selected.getDay();
     const days = [
       'Sunday',
@@ -149,9 +154,10 @@ export class HomeComponent implements OnInit {
       'Saturday',
     ];
     const selectedDay = days[dayIndex];
-
-    // Update the menu based on the selected day
     this.menu = (menuData as any)[selectedDay];
+
+    this.selectedStartDate = date;
+    this.checkBookingsForSelectedDate();
   }
 
   openDialog() {
@@ -173,18 +179,13 @@ export class HomeComponent implements OnInit {
   fetchBookings(): void {
     this.booking.getBookingsByDate().subscribe({
       next: (res) => {
-        console.log('Dates ', res);
         if (res.length > 0) {
           this.bookingsDate = res;
           this.refreshCalendar();
-          console.log('Ruchir');
-          // console.log(this.bookingsDate);
         }
       },
       error: (err) => {
         console.log(err);
-        // alert(err.error.message);
-        // this.toast.error({detail:"ERROR", summary:err.error.message, duration:5000});
       },
     });
   }
@@ -194,6 +195,7 @@ export class HomeComponent implements OnInit {
       this.selectedStartDate = new Date(this.selectedStartDate.getTime());
     }
   }
+
   dateClassV2() {
     return (date: Date): MatCalendarCellCssClasses => {
       const day = date.getDay();
@@ -220,10 +222,7 @@ export class HomeComponent implements OnInit {
   }
 
   disablePastDatesFilter = (d: Date): boolean => {
-    const today = new Date(); // Get today's date
-    // today.setHours(0, 0, 0, 0); // Set time to start of the day
-
-    // Disable if the date is before today or if it's a weekend (Saturday or Sunday)
+    const today = new Date();
     return d > today && d.getDay() !== 0 && d.getDay() !== 6;
   };
 }

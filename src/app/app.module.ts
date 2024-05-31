@@ -34,6 +34,8 @@ import { NotificationDialogComponent } from './component/notification-dialog/not
 // import { MatErrorModule } from '@angular/material/core';
 import {MatIconModule } from '@angular/material/icon';
 import { AuthInterceptor } from './pages/interceptor/auth.interceptor';
+import { MatOptionModule } from '@angular/material/core';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
@@ -83,6 +85,8 @@ import { AuthInterceptor } from './pages/interceptor/auth.interceptor';
         MatFormFieldModule,
         MatInputModule,
         MatIconModule,
+        MatOptionModule,
+        MatSelectModule
         // MatErrorModule
 
 

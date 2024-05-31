@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
 import { BookingService } from 'src/app/services/booking.service';
-
 
 @Component({
   selector: 'app-cancel-booking',
@@ -25,11 +23,12 @@ export class CancelBookingComponent implements OnInit {
     private router: Router,
   ) {
     this.selectedDate = new Date();
-    this.selectedDate.setDate(this.selectedDate.getDate() + 1); // Add one day
+    this.selectedDate.setDate(this.selectedDate.getDate()); // Add one day
   }
 
   ngOnInit(): void {
     this.cancelForm = this.fb.group({
+      mealType: ['',Validators.required],
       reason: ['', Validators.required]
     });
   }
@@ -42,13 +41,28 @@ export class CancelBookingComponent implements OnInit {
 
   onSubmit() {
     
+    this.closeForm();
+
+    if (this.cancelForm.invalid) {
+      return;
+    }
+
+    const mealType = this.cancelForm.value.mealType;
+    const reason = this.cancelForm.value.reason;
+
+    
     this.selectedDate = new Date();
-    this.selectedDate.setDate(this.selectedDate.getDate() + 1); // Add one day
+    this.selectedDate.setDate(this.selectedDate.getDate()); // Add one day
     console.log(this.selectedDate);
+
+    console.log('Selected Date:', this.selectedDate);
+    console.log('Meal Type:', mealType);
+    console.log('Reason:', reason);
+    
     this.closeForm();
 
 
-
+    
     this.booking.cancelBooking(this.selectedDate).subscribe({
       next:(res=>{    
         console.log("message: ",res);
@@ -66,6 +80,7 @@ export class CancelBookingComponent implements OnInit {
 
       })
       })
+     
   }
 
 }
