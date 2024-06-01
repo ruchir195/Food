@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { MatCalendarCellCssClasses } from '@angular/material/datepicker';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -11,17 +11,13 @@ import { BookingService } from 'src/app/services/booking.service';
   templateUrl: './view-booking.component.html',
   styleUrls: ['./view-booking.component.css'],
 })
-export class ViewBookingComponent {
-
-
+export class ViewBookingComponent implements OnInit {
   selectedDate: any;
   public selectedStartDate!: Date | null;
   bookingsDate: any[] = [];
   bookedDayCount: number = 0;
   displayedMonth: number = new Date().getMonth();
   displayedYear: number = new Date().getFullYear();
-
-  
 
   constructor(
     private fb: FormBuilder,
@@ -32,72 +28,58 @@ export class ViewBookingComponent {
   ) {}
 
   bookings: any = {};
+
   closeForm() {
     this.dialogRef.close();
   }
 
   ngOnInit() {
     this.selectedStartDate = new Date();
-    this.refreshCalendar();
-    this.fetchBookings();
-    
+    this.fetchBookDays();
   }
-
 
   dateClassV2() {
     return (date: Date): MatCalendarCellCssClasses => {
       const day = date.getDay();
       const isSaturday = day === 6;
       const isSunday = day === 0;
-  
+
       if (isSaturday || isSunday) {
         return 'weekend-date';
       }
-  
+
       const dateString = date.toISOString().split('T')[0];
-      const isBooked = this.bookingsDate.some(booking => {
+      const isBooked = this.bookingsDate.some((booking) => {
         const startDate = new Date(booking.bookingStartDate).toISOString().split('T')[0];
         const endDate = new Date(booking.bookingEndDate).toISOString().split('T')[0];
         return dateString >= startDate && dateString <= endDate;
       });
 
-      if (isBooked) {
-        this.bookedDayCount++;
-      }
-      return isBooked ? 'booked-date' : '';   
+      return isBooked ? 'booked-date' : '';
     };
   }
 
-  fetchBookings(): void {
+  fetchBookDays(): void {
     this.booking.getBookingsByDate().subscribe({
-      next:(res=>{    
-        console.log("Dates ",res);
+      next: (res) => {
         if (res.length > 0) {
           this.bookingsDate = res;
-          console.log(this.bookingsDate);
-          this.refreshCalendar();
           this.countBookedDaysInDisplayedMonth(); // Call to count booked days in the displayed month
         }
-
-
-        
-      }),
-      error:(err=>{
+      },
+      error: (err) => {
         console.log(err);
-        // alert(err.error.message);
-        this.toast.error({detail:"ERROR", summary:err.error.message, duration:5000});
-
-      })
-    })
+        this.toast.error({ detail: "ERROR", summary: err.error.message, duration: 5000 });
+      }
+    });
   }
 
   onSelect(event: any) {
-    console.log(event);
     this.selectedDate = event;
   }
 
-
   countBookedDaysInDisplayedMonth(): void {
+    this.bookedDayCount = 0; // Reset count before calculating
     const currentMonth = this.displayedMonth;
     const currentYear = this.displayedYear;
 
@@ -108,7 +90,7 @@ export class ViewBookingComponent {
       const date = new Date(currentYear, currentMonth, day);
       const dateString = date.toISOString().split('T')[0];
 
-      this.bookingsDate.forEach(booking => {
+      this.bookingsDate.forEach((booking) => {
         const startDate = new Date(booking.bookingStartDate).toISOString().split('T')[0];
         const endDate = new Date(booking.bookingEndDate).toISOString().split('T')[0];
         if (dateString >= startDate && dateString <= endDate) {
@@ -117,24 +99,23 @@ export class ViewBookingComponent {
       });
     }
 
-    this.bookedDayCount = bookedDays.size;
+    this.bookedDayCount = bookedDays.size - 2;
     console.log(`Number of booked days in the displayed month: ${this.bookedDayCount}`);
   }
 
+  onMonthSelected(event: Date): void {
+    this.displayedMonth = event.getMonth();
+    this.displayedYear = event.getFullYear();
+    this.countBookedDaysInDisplayedMonth();
+  }
 
-   // Assuming you have a method to handle the month change
-   onMonthSelected(month: number, year: number): void {
-    this.displayedMonth = month;
-    this.displayedYear = year;
+  onYearSelected(event: Date): void {
+    this.displayedMonth = event.getMonth();
+    this.displayedYear = event.getFullYear();
     this.countBookedDaysInDisplayedMonth();
   }
 
   refreshCalendar() {
-    this.selectedStartDate = new Date(this.selectedStartDate!.getTime());
     this.countBookedDaysInDisplayedMonth(); // Update count when the calendar is refreshed
   }
-
-
- 
-
 }

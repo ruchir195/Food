@@ -23,18 +23,18 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.uniqueName = this.auth.getUniqueName();
-    console.log('Unique Name: ', this.uniqueName);
+    // console.log('Unique Name: ', this.uniqueName);
 
  
 
+    const token = this.auth.decodedToken();
+    let email = token.email;
 
-    let email = localStorage.getItem("email");
-
-    if (email) {
+    if (token.email) {
       this.auth.getUserDetails(email).subscribe(
         data => {
           this.name = data.firstName;
-          console.log('User Details: ', this.name);
+          // console.log('User Details: ', this.name);
         },
         error => {
           console.error('Error fetching user details: ', error);
@@ -54,11 +54,11 @@ export class HeaderComponent implements OnInit {
       if(email){
         this.notification.getNotifications(email).subscribe((response) => {
           if (response.statusCode === 200) {
-            console.log('notification: ', response);
+            // console.log('notification: ', response);
             this.notifications = response.notifications;
             this.updateNotificationCount();
             // this.notificationCount = this.notifications.length;
-            console.log(this.notificationCount);
+            // console.log(this.notificationCount);
             this.cdr.detectChanges(); // Ensure the view is updated
           }
         });
@@ -89,7 +89,7 @@ export class HeaderComponent implements OnInit {
 
 
     openNotifications(event: MouseEvent): void {
-      console.log("this : ",this.notifications);
+      // console.log("this : ",this.notifications);
       event.stopPropagation();
       const dialogRef = this.dialog.open(NotificationDialogComponent, {
         width: '500px',

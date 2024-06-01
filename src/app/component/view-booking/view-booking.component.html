@@ -1,23 +1,31 @@
 <div class="booking-container">
   <div class="booking-form">
-    <div class="booking-header">
-      <h1>View Booking</h1>
-      <button (click)="closeForm()">&#10006;</button>
+    <div class="px-3 py-3">
+      <div class="booking-header">
+        <h1>View Booking</h1>
+        <button (click)="closeForm()">&#10006;</button>
+      </div>
+      <!-- <form [formGroup]="bookingForm"> -->
+      <div>
+        
+        <mat-card>
+          <mat-calendar
+            [dateClass]="dateClassV2()"
+            [selected]="selectedDate"
+            (selectedChange)="onSelect($event)"
+            [(ngModel)]="selectedStartDate"
+            (monthSelected)="onMonthSelected($event)"
+            (yearSelected)="onYearSelected($event)"
+          ></mat-calendar>
+        </mat-card>
+  
+        <div class="py-3">
+          <label>Total Bookings: {{ bookedDayCount }}</label>
+        </div>
+        
+      </div>
     </div>
-    <!-- <form [formGroup]="bookingForm"> -->
-    <div class="form-group">
-      
-      <mat-card>
-        <mat-calendar
-          [dateClass]="dateClassV2()"
-          [selected]="selectedDate"
-          (selectedChange)="onSelect($event)"
-          [(ngModel)]="selectedStartDate"
-        ></mat-calendar>
-      </mat-card>
-
-      <label>Total Bookings: {{ bookedDayCount }}</label>
-    </div>
+    
     <!-- </form> -->
   </div>
 </div>

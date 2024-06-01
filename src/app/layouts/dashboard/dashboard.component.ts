@@ -75,7 +75,7 @@ export class DashboardComponent implements OnInit {
       let fullNameFromToken = this.auth.getFullNameFromToken();
       this.fullName = val || fullNameFromToken;
 
-      console.log(fullNameFromToken);
+      // console.log(fullNameFromToken);
     });
 
     this.userStore.getRoleFromStore().subscribe((val) => {

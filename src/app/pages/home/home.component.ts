@@ -24,10 +24,10 @@ export class HomeComponent implements OnInit {
   public users: any = [];
   public fullName: string = '';
   public role!: string;
-  selected!: Date | null; // Initialize selected to null
+  selected!: Date | null;
   today!: string;
   menu!: { lunch: string[]; dinner: string[] };
-  day: string = ''; // Initialize day variable
+  day: string = '';
   bookingsDate: any[] = [];
   public selectedStartDate!: Date | null;
 
@@ -44,9 +44,7 @@ export class HomeComponent implements OnInit {
   };
   public userId: any;
 
-  onChange(url: SafeValue) {
-    // this.qrCodeDownloadeLink = url;
-  }
+  onChange(url: SafeValue) {}
 
   constructor(
     private datePipe: DatePipe,
@@ -60,13 +58,10 @@ export class HomeComponent implements OnInit {
 
   bookings: any = {};
 
-  ngOnInit(): void {
+  ngOnInit() {
     this.selectedStartDate = new Date();
-    this.refreshCalendar();
     this.fetchBookings();
-
-    this.updateButtonStates();
-    setInterval(() => this.updateButtonStates(), 60000);
+    this.refreshCalendar();
 
     this.userStore.getFullNameFromStore().subscribe((val) => {
       let fullNameFromToken = this.auth.getFullNameFromToken();
@@ -93,8 +88,8 @@ export class HomeComponent implements OnInit {
     this.today = days[dayIndex];
     this.menu = (menuData as any)[this.today];
 
-    // Ensure button states are updated on initialization
-    this.checkBookingsForSelectedDate();
+    this.updateButtonStates();
+    setInterval(() => this.updateButtonStates(), 60000);
   }
 
   logout() {
@@ -103,11 +98,10 @@ export class HomeComponent implements OnInit {
 
   onGenerateQR() {
     const dialogRef = this.dialogRef.open(QrCodeComponent, {
-      disableClose: true, // Prevent dialog from closing on outside click
+      disableClose: true,
     });
     this.isGenerateQRDisabled = true;
 
-    // Re-enable the button after 2 minutes (120000 milliseconds)
     setTimeout(() => {
       this.isGenerateQRDisabled = false;
     }, 120000);
@@ -161,39 +155,33 @@ export class HomeComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialogRef.open(AddBookingComponent);
-  }
-
-  openbooking() {
-    this.dialogRef.open(ViewBookingComponent);
-  }
-
-  openQuickBooking() {
-    this.dialogRef.open(QuickBookComponent);
-  }
-
-  cancelBooking() {
-    this.dialogRef.open(CancelBookingComponent);
-  }
-
-  fetchBookings(): void {
-    this.booking.getBookingsByDate().subscribe({
-      next: (res) => {
-        if (res.length > 0) {
-          this.bookingsDate = res;
-          this.refreshCalendar();
-        }
-      },
-      error: (err) => {
-        console.log(err);
-      },
+    const dialogRef = this.dialogRef.open(AddBookingComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchBookings(); // Fetch bookings after dialog is closed
     });
   }
 
-  refreshCalendar() {
-    if (this.selectedStartDate) {
-      this.selectedStartDate = new Date(this.selectedStartDate.getTime());
-    }
+  openbooking() {
+    const dialogRef = this.dialogRef.open(ViewBookingComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchBookings(); // Fetch bookings after dialog is closed
+    });
+  }
+
+  openQuickBooking() {
+    const dialogRef = this.dialogRef.open(QuickBookComponent);
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchBookings(); // Fetch bookings after dialog is closed
+    });
+  }
+
+  cancelBooking() {
+    const dialogRef = this.dialogRef.open(CancelBookingComponent, {
+      data: { selectedDate: this.selectedStartDate }
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      this.fetchBookings(); // Fetch bookings after dialog is closed
+    });
   }
 
   dateClassV2() {
@@ -219,6 +207,25 @@ export class HomeComponent implements OnInit {
 
       return isBooked ? 'booked-date' : '';
     };
+  }
+
+  fetchBookings(): void {
+    this.booking.getBookingsByDate().subscribe({
+      next: (res) => {
+        if (res.length > 0) {
+          this.bookingsDate = res;
+          this.refreshCalendar();
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  refreshCalendar() {
+    this.selectedStartDate = new Date(this.selectedStartDate!.getTime());
+    this.dateAdapter.setLocale('en-US');
   }
 
   disablePastDatesFilter = (d: Date): boolean => {

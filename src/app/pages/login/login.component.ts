@@ -56,13 +56,8 @@ ngOnInit(): void
 onLogin(){
     if(this.loginForm.valid)
       {
-        console.log(this.loginForm.value);
-        // alert("Form Login successfully.")
-        localStorage.setItem('email',this.loginForm.value.email);
         this.auth.login(this.loginForm.value).subscribe({
           next:(res=>{    
-            console.log("username: ",res);
-            // alert("Login successfully.")
             this.loginForm.reset();
             this.auth.storeToken(res.accessToken);
             this.auth.storeRefreshToken(res.refreshToken);
@@ -83,7 +78,6 @@ onLogin(){
       }
       else
       {
-        console.log("Ruchir PArmar")
         if (this.loginForm.controls['email'].invalid && this.loginForm.controls['password'].invalid) {
           this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address and password', duration: 5000 });
         } else {

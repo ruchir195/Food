@@ -40,7 +40,11 @@ export class AuthInterceptor implements HttpInterceptor {
               errorMessage = err.error.message;
             } else if (err.error.error) {
               errorMessage = err.error.error;
-            } else {
+            } else if (err.error) {
+              errorMessage = err.error;
+            }
+             else {
+              console.log(err);
               errorMessage = 'Unknown error occurred';
             }
             return throwError(() => {

@@ -23,12 +23,10 @@ export class AuthService {
 
 
   signUp(userObj:any){
-    console.log("services: ",userObj);
     return this.http.post<any>(`${this.baseUrl}register`, userObj);
   }
 
   login(loginObj:any){
-    console.log("services: ",loginObj);
     return this.http.post<any>(`${this.baseUrl}authenticate`, loginObj)
   }
 
@@ -56,14 +54,13 @@ newPassword(newPasswordObj: any){
 
 
 changePassword(changePasswordObj:any ){
-  const email = localStorage.getItem('email');
+  // const email = localStorage.getItem('email');
+  const token = this.decodedToken()
   var changepassword = {
-    email: email,
+    email: token.email,
     opassword: changePasswordObj.opassword,
     password: changePasswordObj.cpassword
   }
-  console.log(changepassword);
-  console.log(this.http.post<any>(`${this.baseUrl}changePassword`, changepassword))
   return this.http.post<any>(`${this.baseUrl}changePassword`, changepassword);
 }
 
@@ -97,7 +94,6 @@ changePassword(changePasswordObj:any ){
     if (token) {
       try {
         const decodedToken = this.jwtHelper.decodeToken(token);
-        console.log('jwt: ', decodedToken);
         this.unique_name = decodedToken.unique_name; // Ensure this matches your token structure
         return decodedToken;
       } catch (error) {
