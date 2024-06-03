@@ -46,10 +46,8 @@ onSubmit(){
         console.log(this.otpfrom.value);
 
         var backOtp = localStorage.getItem("otp");
-        console.log("otp: ",backOtp);
 
         var userOtp = this.otpfrom.value;
-        console.log("userotp: ",userOtp.otp);
 
         if(backOtp === userOtp.otp){
           this.toast.success({detail:"SUCCESS", summary:"OTP is Correct", duration:5000});
@@ -81,13 +79,13 @@ onSubmit(){
       {
 
         if (this.otpfrom.controls['otp'].invalid) {
-          this.toast.warning({ detail: 'ERROR', summary: 'Please enter a OTP', duration: 5000 });
+          this.toast.error({ detail: 'ERROR', summary: 'Please enter a OTP', duration: 5000 });
         } else {
           if (this.otpfrom.controls['otp'].invalid) {
             if (this.otpfrom.controls['otp'].errors?.['required']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter OTP', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter OTP', duration: 5000 });
             } else if (this.otpfrom.controls['otp'].errors?.['otp']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid OTP', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a valid OTP', duration: 5000 });
             }
           }
         }

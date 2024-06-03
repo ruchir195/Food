@@ -96,7 +96,7 @@ ngOnInit(): void
             },
             error:(err) => {
               // alert(err?.error.message);
-              this.toast.error({detail:"ERROR", summary:err?.error.message, duration:5000});
+              this.toast.error({detail:"ERROR", summary:"Old password is incorrect", duration:5000});
             }
           })
 
@@ -110,28 +110,28 @@ ngOnInit(): void
       {
 
         if (this.changePasswordForm.controls['opassword'].invalid && this.changePasswordForm.controls['newpassword'].invalid) {
-          this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid information', duration: 5000 });
+          this.toast.error({ detail: 'ERROR', summary: 'Please enter a valid information', duration: 5000 });
         } else {
           if (this.changePasswordForm.controls['opassword'].invalid) {
             if (this.changePasswordForm.controls['opassword'].errors?.['required']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a old password', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a old password', duration: 5000 });
             } else if (this.changePasswordForm.controls['opassword'].errors?.['pattern']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid Password', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a valid Password', duration: 5000 });
             }
           }
           if (this.changePasswordForm.controls['newpassword'].invalid) {
             if (this.changePasswordForm.controls['newpassword'].errors?.['required']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a new password', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a new password', duration: 5000 });
             } else if (this.changePasswordForm.controls['newpassword'].errors?.['pattern']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
             }
           }
 
           if (this.changePasswordForm.controls['cpassword'].invalid) {
             if (this.changePasswordForm.controls['cpassword'].errors?.['required']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a Confirm password', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a Confirm password', duration: 5000 });
             } else if (this.changePasswordForm.controls['cpassword'].errors?.['pattern']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
             }
           }
         }

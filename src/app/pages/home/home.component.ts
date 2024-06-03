@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
   };
   public userId: any;
 
-  onChange(url: SafeValue) {}
+  onChange(url: SafeValue) { }
 
   constructor(
     private datePipe: DatePipe,
@@ -54,7 +54,7 @@ export class HomeComponent implements OnInit {
     private dialogRef: MatDialog,
     private coupen: CoupenService,
     private booking: BookingService
-  ) {}
+  ) { }
 
   bookings: any = {};
 
@@ -121,7 +121,7 @@ export class HomeComponent implements OnInit {
     const selectedDateString = this.selectedStartDate
       .toISOString()
       .split('T')[0];
-      const todayString = new Date().toISOString().split('T')[0];
+    const todayString = new Date().toISOString().split('T')[0];
     const hasBooking = this.bookingsDate.some((booking) => {
       const startDate = new Date(booking.bookingStartDate)
         .toISOString()
@@ -217,7 +217,7 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         if (res.length > 0) {
           this.bookingsDate = res;
-          console.log("res: ",res);
+          console.log("res: ", res);
           this.refreshCalendar();
         }
       },

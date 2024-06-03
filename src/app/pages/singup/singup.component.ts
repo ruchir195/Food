@@ -187,7 +187,7 @@ export class SingupComponent implements OnInit {
             this.toast.error({
               detail: 'ERROR',
               summary:
-                'Password must be at least 6 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)',
+                'Password and Confirm password does not matched',
               duration: 5000,
             });
           }

@@ -55,8 +55,6 @@ ngOnInit(): void
 
 onSubmit(){
       if(this.newpasForm.valid){
-        console.log(this.newpasForm.value);
-        console.log("email: ",this.newpasForm.value.email);
 
         if(this.newpasForm.value.password === this.newpasForm.value.cpassword){
           console.log(this.newpasForm.value.password);
@@ -84,28 +82,26 @@ onSubmit(){
       {
 
         if (this.newpasForm.controls['password'].invalid && this.newpasForm.controls['cpassword'].invalid) {
-          this.toast.warning({ detail: 'ERROR', summary: 'Please enter a Password and confirm Password', duration: 5000 });
+          this.toast.error({ detail: 'ERROR', summary: 'Please enter a Password and confirm Password', duration: 5000 });
         } else {
           if (this.newpasForm.controls['password'].invalid) {
             if (this.newpasForm.controls['password'].errors?.['required']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a password', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a password', duration: 5000 });
             } else if (this.newpasForm.controls['password'].errors?.['pattern']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
             }
           }
 
           if (this.newpasForm.controls['cpassword'].invalid) {
             if (this.newpasForm.controls['cpassword'].errors?.['required']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a Confirm password', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a Confirm password', duration: 5000 });
             } else if (this.newpasForm.controls['cpassword'].errors?.['pattern']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
             }
           }
         }
 
 
-
-        console.log("form is not valid");
         //throw a error using toaster and with  required fileds
         ValidateForm.validateAllFormFields(this.newpasForm)
         // alert("Your form is invalid");

@@ -25,7 +25,7 @@ export class ViewBookingComponent implements OnInit {
     private booking: BookingService,
     private toast: NgToastService,
     private router: Router
-  ) {}
+  ) { }
 
   bookings: any = {};
 
