@@ -65,8 +65,9 @@ export class CancelBookingComponent implements OnInit {
         console.log("message: ",res);
         // alert("Login successfully.")
        
-        
+        this.closeForm();
         this.toast.success({detail:"SUCCESS", summary:res.message, duration:5000});
+       
         this.router.navigate(['/dashboard/home']);
         
       }),
@@ -74,6 +75,7 @@ export class CancelBookingComponent implements OnInit {
         console.log("cancel error: ",err);
         // alert(err.error.message);
         this.toast.error({detail:"ERROR", summary:err.error, duration:5000});
+        this.closeForm();
 
       })
       })

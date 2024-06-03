@@ -26,7 +26,7 @@ export class BookingService {
     // console.log("book email: ",token.email);
     const bookingObject = {
       email: token.email,
-      category: bookObj.category,
+      // category: bookObj.category,
       bookingType: bookObj.mealType,
       bookingDate: new Date(),
       bookingStartDate: bookObj.dates.start,
@@ -72,10 +72,10 @@ export class BookingService {
     // console.log("quick booking : ",token.email);
     const bookingObject = {
       email: token.email,
-      category: quickBook.category,
+      // category: quickBook.category,
       bookingType: quickBook.mealType,
       bookingDate: new Date(),
-      bookingStartDate: quickBook.selectedDate
+      bookingStartDate: quickBook.bookingStartDate
     }
 
     console.log(bookingObject)

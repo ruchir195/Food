@@ -1,16 +1,16 @@
 <div class="booking-container">
     <div class="booking-form" *ngIf="isFormVisible">
       <h2>Book a Meal</h2>
-      <form [formGroup]="bookingForm" (ngSubmit)="bookMeal()">
+      <form [formGroup]="bookingForm" >
   
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label>Select Category</label>
           <mat-radio-group formControlName="category">
             <mat-radio-button value="employee">Employees</mat-radio-button>
             <mat-radio-button value="nonEmployee">Non Employees</mat-radio-button>
             <mat-radio-button value="customBooking">Custom Booking</mat-radio-button>
           </mat-radio-group>
-        </div>
+        </div> -->
   
         <div class="form-group">
           <label>Select Meal Type</label>
@@ -41,7 +41,7 @@
   
         <div class="form-actions">
           <button mat-button (click)="closeForm()">Cancel</button>
-          <button mat-raised-button color="primary" type="submit">
+          <button mat-raised-button color="primary" (click)="bookMeal()">
             Book
           </button>
         </div>

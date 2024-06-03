@@ -79,20 +79,20 @@ onLogin(){
       else
       {
         if (this.loginForm.controls['email'].invalid && this.loginForm.controls['password'].invalid) {
-          this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address and password', duration: 5000 });
+          this.toast.error({ detail: 'ERROR', summary: 'Please enter a valid email address and password', duration: 5000 });
         } else {
           if (this.loginForm.controls['email'].invalid) {
             if (this.loginForm.controls['email'].errors?.['required']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter an email address', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter an email address', duration: 5000 });
             } else if (this.loginForm.controls['email'].errors?.['email']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a valid email address', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a valid email address', duration: 5000 });
             }
           }
           if (this.loginForm.controls['password'].invalid) {
             if (this.loginForm.controls['password'].errors?.['required']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Please enter a password', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Please enter a password', duration: 5000 });
             } else if (this.loginForm.controls['password'].errors?.['pattern']) {
-              this.toast.warning({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
+              this.toast.error({ detail: 'ERROR', summary: 'Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one digit, and one special character (@, $, !, %, *, ?, &)', duration: 5000 });
             }
           }
         }

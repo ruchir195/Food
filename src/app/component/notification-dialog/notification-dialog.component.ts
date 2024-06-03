@@ -43,21 +43,21 @@ export class NotificationDialogComponent implements OnInit {
     this.fetchNotification();
   }
 
-  markAsRead(index: number): void {
-    this.notificationCount--;
-    console.log(this.notificationCount);
-    this.notifications[index].read = true
-    this.updateLocalStorage();
-    this.dialogClosed.emit();
-  }
+  // markAsRead(index: number): void {
+  //   this.notificationCount--;
+  //   console.log(this.notificationCount);
+  //   this.notifications[index].read = true
+  //   this.updateLocalStorage();
+  //   this.dialogClosed.emit();
+  // }
 
-  markAsUnread(index: number): void {
-    this.notificationCount++;
-    console.log(this.notificationCount);
-    this.notifications[index].read  = false
-    this.updateLocalStorage();
-    this.dialogClosed.emit();
-  }
+  // markAsUnread(index: number): void {
+  //   this.notificationCount++;
+  //   console.log(this.notificationCount);
+  //   this.notifications[index].read  = false
+  //   this.updateLocalStorage();
+  //   this.dialogClosed.emit();
+  // }
 
   clearNotifications(): void {
     this.data.notifications.forEach(

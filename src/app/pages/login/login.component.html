@@ -18,7 +18,7 @@
               <div class="input-field"
                   [class.error]="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')">
                   <span class="fa fa-user p-2"></span>
-                  <input formControlName="email"  type="text" placeholder="Email Address">
+                  <input formControlName="email"  type="text" placeholder="Email Address" class="font-black">
               </div>
               <small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')" class="text-danger">*Email is required</small>
           </div>                       

@@ -121,6 +121,7 @@ export class HomeComponent implements OnInit {
     const selectedDateString = this.selectedStartDate
       .toISOString()
       .split('T')[0];
+      const todayString = new Date().toISOString().split('T')[0];
     const hasBooking = this.bookingsDate.some((booking) => {
       const startDate = new Date(booking.bookingStartDate)
         .toISOString()
@@ -132,7 +133,9 @@ export class HomeComponent implements OnInit {
     });
 
     this.isCancelBookingDisabled = !hasBooking;
-    this.isGenerateQRDisabled = !hasBooking;
+    this.isGenerateQRDisabled = !(
+      hasBooking && selectedDateString === todayString
+    );
   }
 
   onDateSelected(date: Date | null): void {
@@ -214,6 +217,7 @@ export class HomeComponent implements OnInit {
       next: (res) => {
         if (res.length > 0) {
           this.bookingsDate = res;
+          console.log("res: ",res);
           this.refreshCalendar();
         }
       },

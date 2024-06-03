@@ -46,7 +46,7 @@ export class AddBookingComponent implements OnInit {
 
   ngOnInit(): void {
     this.bookingForm = this.fb.group({
-      category: ['', Validators.required],
+      // category: ['', Validators.required],
       mealType: ['', Validators.required],
       dates: this.fb.group({
         start: new FormControl(null, [Validators.required, this.dateValidator.bind(this)]),

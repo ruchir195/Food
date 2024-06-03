@@ -39,7 +39,7 @@ constructor(
 
 ngOnInit(): void {
   this.quickbookForm = this.fb.group({
-    category: ['', Validators.required],
+    // category: ['', Validators.required],
     mealType: ['', Validators.required],
     
   });
@@ -71,7 +71,13 @@ closeForm() {
 quickBookMeal(): void {
   if (this.quickbookForm.valid) {
     console.log(this.quickbookForm.value);
-    this.booking.quickBook(this.quickbookForm.value).subscribe({
+    const quickObj = {
+      // category: this.quickbookForm.value.category,
+      mealType: this.quickbookForm.value.mealType,
+      bookingStartDate: this.selectedDate
+    }
+    console.log(quickObj);
+    this.booking.quickBook(quickObj).subscribe({
       next:(res=>{    
         console.log("username: ",res);
         // alert("Login successfully.")
