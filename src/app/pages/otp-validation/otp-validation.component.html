@@ -15,7 +15,7 @@
               <div class="input-field"
                   [class.error]="otpfrom.controls['otp'].dirty && otpfrom.hasError('required', 'otp')">
                   <span class="fa fa-user p-2"></span>
-                  <input formControlName="otp" type="text" placeholder="otp">
+                  <input formControlName="otp" type="text" placeholder="Enter OTP">
               </div>
               <small
               *ngIf="otpfrom.controls['otp'].dirty && otpfrom.hasError('required', 'otp')"

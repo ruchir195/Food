@@ -52,12 +52,10 @@ export class CancelBookingComponent implements OnInit {
     }
 
     console.log("cancel Form Value: ",canselFormObj);
-
     console.log('Selected Date:', this.selectedDate);
     console.log('Meal Type:', mealType);
     
     this.closeForm();
-
 
     
     this.booking.cancelBooking(canselFormObj).subscribe({
@@ -76,10 +74,8 @@ export class CancelBookingComponent implements OnInit {
         // alert(err.error.message);
         this.toast.error({detail:"ERROR", summary:err.error, duration:5000});
         this.closeForm();
-
       })
-      })
-     
+      })     
   }
 
 }

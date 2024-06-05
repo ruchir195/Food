@@ -74,7 +74,7 @@ body {
   }
   
   button[mat-raised-button] {
-    background: #00796b;
+    background: #e71d0f;
     color: #fff;
     transition: background 0.3s ease;
   }

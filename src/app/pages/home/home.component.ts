@@ -234,6 +234,7 @@ export class HomeComponent implements OnInit {
 
   disablePastDatesFilter = (d: Date): boolean => {
     const today = new Date();
-    return d > today && d.getDay() !== 0 && d.getDay() !== 6;
+    today.setHours(0,0,0,0);
+    return d >= today && d.getDay() !== 0 && d.getDay() !== 6;
   };
 }
